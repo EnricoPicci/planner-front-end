@@ -1,0 +1,144 @@
+
+header, footer {
+  border-color: #eebb55;
+  background: #ffeebb;
+}
+
+.container1 {
+    box-sizing: content-box;
+    background: #F0F3F4;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    min-height: 384px;
+}
+
+.section {
+  margin: 4px;
+  /* padding: 5px; */
+  border: 1px solid #cccc33;
+  border-radius: 7pt;
+}
+
+.avatars {
+  border-color: #cccc33;
+  background: #dddd88;
+  cursor: pointer;
+}
+
+.filters {
+    background-color: #ffffff;
+    color: #5b5b60;
+    border: none;
+    border-radius: 0;
+    box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.25);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.filters-header {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: 15px;
+    border-color: rgba(0, 0, 0, 0.07)
+    /* min-height: 50px; */
+}
+.filters-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+    font-weight: 300;
+    text-align: center;
+}
+.filters-row {
+    margin-top: 3rem;
+}
+
+.gender-choice {
+    padding: 10px;
+    margin: 10px;
+}
+.gender-chosen {
+    background: lightgray;
+}
+.gender {
+    font-size: 17px;
+    display: block;
+    text-align: center;
+}
+
+.select {
+    width: 80%;
+}
+
+.slider {
+    margin-top: 20px;
+}
+.slider-scale {
+    font-size: 10px;
+    display: block;
+    margin-top: -10px;
+}
+.slider-scale.min {
+    text-align: left;
+    padding-left: 10%;
+}
+.slider-scale.max {
+    text-align: right;
+    padding-right: 10%;
+}
+
+.mat-slider-horizontal {
+  width: 80%;
+}
+/* .mat-slider-thumb-label-text {
+    font-size: 8px;
+    font-weight: 500;
+} */
+/* .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
+    background-color: black;
+} */
+
+/* .slider .mat-accent .mat-slider-track-fill {background-color:lightgray}
+
+.slider .mat-slider-thumb-label-text {color: black} */
+
+/* article, nav {
+  margin: 4px;
+  padding: 5px;
+  border: 1px solid #cccc33;
+  border-radius: 7pt;
+} */
+
+
+/* article, nav, aside, header, footer {
+  margin: 4px;
+  padding: 5px;
+  border: 1px solid #cccc33;
+  border-radius: 7pt;
+} */
+
+/* #main > article {
+  border-color: #cccc33;
+  background: #dddd88;
+  cursor: pointer;
+} */
+
+
+/* #main > nav, #main > aside {
+  border-color: #8888bb;
+  background: #ccccff;
+} */
+
+
+/* md-card > md-card-actions:last-child {
+  padding-bottom: 16px;
+}
+
+md-card > md-card-actions > button {
+  margin-left: 10px;
+} */

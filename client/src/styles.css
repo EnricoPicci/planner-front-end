@@ -1,3 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.font {
+    margin-bottom: 2px;
+    font-family: Helvetica, Arial, sans-serif;  
+    line-height: 1.1;
+    box-sizing: border-box; 
+    -webkit-font-smoothing: antialiased;
+}
+
+.title {
+    font-weight: bold;
+    color: black;
+    font-size: 24px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #8e8e93;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+.footer {
+    font-size: 10px;
+    color: #8e8e93;
+    padding: 10px;
+}
+
+/* inherited */
+
+/* .card-demo md-card,
+.card-demo md-card-content {
+  margin-bottom: 24px;
+}
+
+.card-demo md-card-footer {
+  left: 24px;
+  margin-bottom: 24px;
+}
+
+.hint {
+   color: #a3a3a3;
+   font-size:0.9em;
+   margin:5px;
+   margin-bottom:0;
+}
+
+.forceAbove {
+  margin-top: -275px;
+}
+
+.large {
+  height:200px;
+}
+
+.large div.one, .large div.two {
+  color:white;
+} */
