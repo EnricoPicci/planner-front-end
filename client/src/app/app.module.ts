@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import {AvatarListComponent} from './avatar-list/avatar-list.component';
+import { AvatarComponent } from './avatar/avatar.component';
 
 const appRoutes: Routes = [
   // { path: 'crisis-center', component: CrisisListComponent },
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AvatarListComponent
+    AvatarListComponent,
+    AvatarComponent
   ],
   imports: [
     BrowserModule,

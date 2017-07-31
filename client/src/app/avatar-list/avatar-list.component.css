@@ -95,13 +95,28 @@ header, footer {
 .mat-slider-horizontal {
   width: 80%;
 }
+::ng-deep .mat-accent .mat-slider-thumb {
+    background-color: black;
+} 
+::ng-deep .mat-accent .mat-slider-thumb-label {
+    background-color: black;
+} 
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: black;
+} 
+::ng-deep .mat-slider-thumb-label-text {
+    font-size: 8px;
+}
 /* .mat-slider-thumb-label-text {
     font-size: 8px;
     font-weight: 500;
 } */
-/* .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
+/* ::ng-deep .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill {
     background-color: black;
-} */
+}  */
+/* ::ng-deep .mat-accent .mat-slider-thumb-label {
+    background-color: black;
+}  */
 
 /* .slider .mat-accent .mat-slider-track-fill {background-color:lightgray}
 
