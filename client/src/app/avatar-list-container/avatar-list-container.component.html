@@ -1,0 +1,80 @@
+<md-card>
+  <md-card-title class="font title">WALL</md-card-title>
+  <md-card-subtitle class="font subtitle">Scegli il profilo più simile al tuo.</md-card-subtitle>
+  <md-card-content>
+    <div class="container1" fxFlex fxLayout="row">
+      <div class="section filters" fxFlex="1 6 20%">     
+        <div class="filters-header">
+          <h4 class="font filters-title">Filtri</h4>
+        </div>
+        <div class="filters-row">
+          <div fxFlex="1 1 50%" class="gender-choice" [class.gender-chosen]="isMale" (click)="isMale = true">
+            <i class="fa fa-mars gender" style="font-size:20px"></i>
+            <span class="gender font">Uomo</span>
+          </div>
+          <div fxFlex="1 1 50%" class="gender-choice" [class.gender-chosen]="!isMale" (click)="isMale = false">
+            <i class="fa fa-venus gender" style="font-size:20px"></i>
+            <span class="gender font">Donna</span>
+          </div>
+        </div>
+        <div class="filters-row gender label font">
+          <md-select placeholder="Professione" class="select">
+            <md-option>----</md-option>
+            <md-option *ngFor="let job of jobList$ | async" [value]="job.code">{{ job.name }}</md-option>
+          </md-select>
+        </div>
+        <div class="filters-row label centered font">
+          <div>{{'Stipendio - ' + income}}</div>
+          <div class="slider">
+            <md-slider
+                [max]="20000"
+                [min]="startIncome"
+                [step]="500"
+                [thumb-label]="true"
+                [tick-interval]="5"
+                [value]="0"
+                (change)="incomeChanged($event)">
+            </md-slider>
+          </div>
+        </div>
+        <div class="slider-scale">
+          <div fxFlex="1 1 50%">
+            <span class="slider-scale min font">0</span>
+          </div>
+          <div fxFlex="1 1 50%">
+            <span class="slider-scale max font">20.000</span>
+          </div>
+        </div>
+        <div class="filters-row label centered font">
+          <div>{{'Età - ' + age}}</div>
+          <div class="slider">
+            <md-slider
+                [max]="100"
+                [min]="startAge"
+                [step]="1"
+                [thumb-label]="true"
+                [tick-interval]="10"
+                [value]="20"
+                (change)="ageChanged($event)">
+            </md-slider>
+          </div>
+        </div>
+        <div class="slider-scale">
+          <div fxFlex="1 1 50%">
+            <span class="slider-scale min font">20</span>
+          </div>
+          <div fxFlex="1 1 50%">
+            <span class="slider-scale max font">100</span>
+          </div>
+        </div>
+        <div class="filters-row"></div>
+      </div>
+      <div fxFlex="3 1 80%" fxFlexOrder fxFlexOrder.xs="1">
+        <planner-avatar-list [avatarList]="avatarList$ | async"></planner-avatar-list>
+      </div>
+    </div>
+  </md-card-content>
+  <md-card-footer class="font footer">
+    FFO
+  </md-card-footer>
+</md-card>

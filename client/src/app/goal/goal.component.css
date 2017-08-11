@@ -1,0 +1,22 @@
+.goal {
+    border: 1px solid;
+    border-radius: 11px;
+    z-index: 10;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 45px;
+    background-color: #ffffff;
+    color: #8e8e93;
+    outline: 0;
+    /* -webkit-appearance: button; */
+    overflow: visible;
+    text-align: left;
+}
+.goal-name {
+    /* float: right; */
+    position: absolute;
+    /* top: 80px; */
+    left: 60px;
+    width: 100px;
+    color: ivory;
+}

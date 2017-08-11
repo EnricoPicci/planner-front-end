@@ -1,3 +1,8 @@
-<p>
-  avatar works!
-</p>
+<div class="wallImage">
+  <img [src]="avatar.image" class="image">
+  <planner-goal-list [goals]="avatar.goals" [over]="over" class="goals"></planner-goal-list>
+</div>
+<div>
+  <h3 class="name">{{avatar.name}}</h3>
+  <p class="status">{{avatar.status + ' | ' + avatar.age}}</p>
+</div>

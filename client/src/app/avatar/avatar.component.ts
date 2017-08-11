@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 
 import {AvatarInterface} from '../shared/model/avatar.interface';
 
@@ -8,7 +8,20 @@ import {AvatarInterface} from '../shared/model/avatar.interface';
   styleUrls: ['./avatar.component.css']
 })
 export class AvatarComponent implements OnInit {
-  @Input() avatar: AvatarInterface;  
+  @Input() avatar: AvatarInterface;
+
+  private over = false;
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.over = true;
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.over = false;
+  }
+
 
   constructor() { }
 

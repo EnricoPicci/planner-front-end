@@ -24,6 +24,14 @@
     -webkit-font-smoothing: antialiased;
 }
 
+.label {
+  font-size: 17px;
+}
+.label.centered {
+  display: block;
+  text-align: center;
+}
+
 .footer {
     font-size: 10px;
     color: #8e8e93;
