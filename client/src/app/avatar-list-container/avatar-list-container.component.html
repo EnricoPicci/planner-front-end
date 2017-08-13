@@ -3,11 +3,11 @@
   <md-card-subtitle class="font subtitle">Scegli il profilo più simile al tuo.</md-card-subtitle>
   <md-card-content>
     <div class="container1" fxFlex fxLayout="row">
-      <div class="section filters" fxFlex="1 6 20%">     
-        <div class="filters-header">
-          <h4 class="font filters-title">Filtri</h4>
+      <div class="section left-bar" fxFlex="1 1 20%">     
+        <div class="left-bar-header">
+          <h4 class="font left-bar-title">Filtri</h4>
         </div>
-        <div class="filters-row">
+        <div class="left-bar-row">
           <div fxFlex="1 1 50%" class="gender-choice" [class.gender-chosen]="isMale" (click)="isMale = true">
             <i class="fa fa-mars gender" style="font-size:20px"></i>
             <span class="gender font">Uomo</span>
@@ -17,13 +17,13 @@
             <span class="gender font">Donna</span>
           </div>
         </div>
-        <div class="filters-row gender label font">
+        <div class="left-bar-row gender label font">
           <md-select placeholder="Professione" class="select">
             <md-option>----</md-option>
             <md-option *ngFor="let job of jobList$ | async" [value]="job.code">{{ job.name }}</md-option>
           </md-select>
         </div>
-        <div class="filters-row label centered font">
+        <div class="left-bar-row label centered font">
           <div>{{'Stipendio - ' + income}}</div>
           <div class="slider">
             <md-slider
@@ -45,7 +45,7 @@
             <span class="slider-scale max font">20.000</span>
           </div>
         </div>
-        <div class="filters-row label centered font">
+        <div class="left-bar-row label centered font">
           <div>{{'Età - ' + age}}</div>
           <div class="slider">
             <md-slider
@@ -67,9 +67,9 @@
             <span class="slider-scale max font">100</span>
           </div>
         </div>
-        <div class="filters-row"></div>
+        <div class="left-bar-row"></div>
       </div>
-      <div fxFlex="3 1 80%" fxFlexOrder fxFlexOrder.xs="1">
+      <div fxFlex="1 1 80%">
         <planner-avatar-list [avatarList]="avatarList$ | async"></planner-avatar-list>
       </div>
     </div>

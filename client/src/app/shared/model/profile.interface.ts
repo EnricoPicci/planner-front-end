@@ -1,10 +1,13 @@
 import {GoalInterface} from './goal.interface';
 import {StatusInterface} from './status.interface';
 
-export interface AvatarInterface {
-    name: string;
+export interface ProfileInterface {
+    id: string;
+    firstName: string;
+    lastName: string;
     age: string;
     status: StatusInterface;
-    image: string;
+    initialCapital: number;
+    yearlySavings: number;
     goals: Array<GoalInterface>;
 }

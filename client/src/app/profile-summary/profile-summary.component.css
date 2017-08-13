@@ -1,0 +1,16 @@
+.form {
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 22px;
+}
+
+.form-label {
+    margin-right: 15px;
+    font-size: 15px;
+}
+
+.save-button {
+    background: #1c2b36;
+    color: white;
+    float: right;
+}

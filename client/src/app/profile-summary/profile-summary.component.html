@@ -1,0 +1,20 @@
+ <div class="form"> 
+  <form [formGroup]="profileForm" novalidate>
+    <div>
+      <md-input-container class="form-label">
+        <input mdInput placeholder="Nome" formControlName="firstName">
+      </md-input-container>
+      <md-input-container class="form-label">
+        <input mdInput placeholder="Cognome" formControlName="lastName">
+      </md-input-container>
+      <md-input-container class="form-label">
+        <input mdInput placeholder="Età" formControlName="age">
+      </md-input-container>
+      <md-select placeholder="Stato" formControlName="status" *ngIf="statuses">
+        <md-option>----</md-option>
+        <md-option *ngFor="let status of statuses" [value]="status.code">{{status.name}}</md-option>
+      </md-select>
+      <button md-raised-button class="save-button" (click)='saveProfile()'>Salva Profilo</button>
+    </div>
+  </form>
+ </div> 

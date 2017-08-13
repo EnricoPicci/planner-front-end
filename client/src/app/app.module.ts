@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {MdSidenavModule, MdToolbarModule, MdIconModule, MdCardModule,
-        MdSelectModule, MdSliderModule, MdGridListModule, MdButtonModule, MdCheckboxModule} from '@angular/material';
+        MdSelectModule, MdSliderModule, MdGridListModule, MdButtonModule,
+        MdCheckboxModule, MdInputModule} from '@angular/material';
 import 'hammerjs';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -17,14 +19,22 @@ import { AvatarListContainerComponent } from './avatar-list-container/avatar-lis
 import { BackendHttpService } from './shared/services/backend-http.service';
 import { GoalListComponent } from './goal-list/goal-list.component';
 import { GoalComponent } from './goal/goal.component';
+import { ProfileContainerComponent } from './profile-container/profile-container.component';
+import { ProfileSummaryComponent } from './profile-summary/profile-summary.component';
+import { ProfileGoalSelectionComponent } from './profile-goal-selection/profile-goal-selection.component';
+import { ProfilePlanComponent } from './profile-plan/profile-plan.component';
+import {SessionService} from './shared/services/session.service';
 
 const appRoutes: Routes = [
-  // { path: 'crisis-center', component: CrisisListComponent },
-  // { path: 'hero/:id',      component: HeroDetailComponent },
   {
     path: 'avatars',
     component: AvatarListContainerComponent,
     data: { title: 'Avatar List' }
+  },
+  {
+    path: 'profile',
+    component: ProfileContainerComponent,
+    data: { title: 'Profile' }
   },
   { path: '',
     redirectTo: '/avatars',
@@ -40,7 +50,11 @@ const appRoutes: Routes = [
     AvatarComponent,
     AvatarListContainerComponent,
     GoalListComponent,
-    GoalComponent
+    GoalComponent,
+    ProfileContainerComponent,
+    ProfileSummaryComponent,
+    ProfileGoalSelectionComponent,
+    ProfilePlanComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +64,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     HttpClientModule,
+    ReactiveFormsModule,
     MdSidenavModule,
     MdToolbarModule,
     MdIconModule,
@@ -57,12 +72,14 @@ const appRoutes: Routes = [
     MdSelectModule,
     MdSliderModule,
     MdGridListModule,
+    MdInputModule,
     MdButtonModule,
     MdCheckboxModule,
     FlexLayoutModule
   ],
   providers: [
-    BackendHttpService
+    BackendHttpService,
+    SessionService
   ],
   bootstrap: [AppComponent]
 })
