@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {environment} from '../../environments/environment';
+
 import {GoalInterface} from '../shared/model/goal.interface';
 
 @Component({
@@ -14,6 +16,10 @@ export class GoalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getIcon() {
+    return environment.iconPath + this.goal.icon;
   }
 
 }

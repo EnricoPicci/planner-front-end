@@ -1,5 +1,6 @@
 
 <div class="goal">
-  <i [class]="'icon fa fa-' + goal.icon"></i>
+  <!-- <i [class]="'icon fa fa-' + goal.icon"></i> -->
+  <img [src]="getIcon()">
   <span class="goal-name" *ngIf="over">{{goal.name}}</span>
 </div>

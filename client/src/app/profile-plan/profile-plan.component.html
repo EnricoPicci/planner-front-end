@@ -1,3 +1,24 @@
-<p>
-  profile-plan works!
-</p>
+<div #chartdiv droppable (onDrop)="onDrop($event)" class="section" *ngIf="projection"
+    style="position: absolute; top: 200px; left: 300px; right: 50px; bottom: 60px;">
+  <ngx-charts-line-chart #chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="projection"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [autoScale]="autoScale"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)">
+  </ngx-charts-line-chart>
+
+  <div *ngIf="isChartDefined()">
+    <planner-profile-goal *ngFor="let goal of profile.goals" [goal]="goal" [xOffset]="getxOffsetForGoal(goal)"></planner-profile-goal>
+  </div>
+
+</div>

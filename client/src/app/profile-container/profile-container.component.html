@@ -2,20 +2,31 @@
   <md-card-content>
     <div fxFlex fxLayout="column">
       <div class="profile-summary" fxFlex>
-        <planner-profile-summary [profile]="session.profile"></planner-profile-summary>
+        <planner-profile-summary [profile]="profile"></planner-profile-summary>
       </div>
       <div class="container1" fxLayout="row" fxFlex>
         <div class="section left-bar" fxFlex="1 1 20%">     
-          <div class="left-bar-header">
-            <h4 class="font left-bar-title">Obiettivi</h4>
+          <div class="section-header">
+            <h4 class="font section-title">Obiettivi</h4>
           </div>
-          <div class="left-bar-row">
-            <planner-profile-goal-selection>
+          <div class="section-row">
+            <planner-profile-goal-selection [goalTypes]="goalTypes$ | async">
             </planner-profile-goal-selection>
           </div>
         </div>
-        <div fxFlex="1 1 80%">
-          <planner-avatar-list [avatarList]="avatarList$ | async"></planner-avatar-list>
+        <div class="section" fxFlex="1 1 80%">
+          <div class="section-header">
+            <h4 class="font section-title">Timeline</h4>
+            <div class="section-tools">
+              <h3 class="section-title">
+                Aggiorna
+              </h3>
+              <i class="fa fa-refresh"></i>
+          </div>
+          </div>
+          <div class="section-row">
+            <planner-profile-plan [projection]="projection$ | async" [profile]="profile"></planner-profile-plan>
+          </div>
         </div>
       </div>
     </div>

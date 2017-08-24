@@ -8,6 +8,7 @@ import {AvatarInterface} from '../model/avatar.interface';
 import {JobInterface} from '../model/job.interface';
 import {StatusInterface} from '../model/status.interface';
 import {ProfileInterface} from '../model/profile.interface';
+import {GoalTypeInterface} from '../model/goal-type.interface';
 
 @Injectable()
 export class BackendHttpService {
@@ -42,6 +43,18 @@ export class BackendHttpService {
     const params = new HttpParams().set('id', id);
     const url = this.apiurl + 'getprofile';
     return this.http.get(url, {params})
+                      .map(data => data['results']);
+  }
+
+  getGoalTypeList() {
+    const url = this.apiurl + 'goaltypelist';
+    return this.http.get<Array<GoalTypeInterface>>(url)
+                      .map(data => data['results']);
+  }
+
+  getProjection(profile: ProfileInterface) {
+    const url = this.apiurl + 'projection';
+    return this.http.post(url, profile)
                       .map(data => data['results']);
   }
 

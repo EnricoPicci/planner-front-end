@@ -12,6 +12,9 @@ import 'hammerjs';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { Ng2DragDropModule } from 'ng2-drag-drop';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+
 import { AppComponent } from './app.component';
 import {AvatarListComponent} from './avatar-list/avatar-list.component';
 import { AvatarComponent } from './avatar/avatar.component';
@@ -23,6 +26,7 @@ import { ProfileContainerComponent } from './profile-container/profile-container
 import { ProfileSummaryComponent } from './profile-summary/profile-summary.component';
 import { ProfileGoalSelectionComponent } from './profile-goal-selection/profile-goal-selection.component';
 import { ProfilePlanComponent } from './profile-plan/profile-plan.component';
+import { ProfileGoalComponent } from './profile-plan/profile-goal.component';
 import {SessionService} from './shared/services/session.service';
 
 const appRoutes: Routes = [
@@ -54,7 +58,8 @@ const appRoutes: Routes = [
     ProfileContainerComponent,
     ProfileSummaryComponent,
     ProfileGoalSelectionComponent,
-    ProfilePlanComponent
+    ProfilePlanComponent,
+    ProfileGoalComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,9 @@ const appRoutes: Routes = [
     MdInputModule,
     MdButtonModule,
     MdCheckboxModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    Ng2DragDropModule.forRoot(),
+    NgxChartsModule
   ],
   providers: [
     BackendHttpService,

@@ -48,40 +48,40 @@ router.get('/avatarlist', function(req, res, next) {
     age: '37',
     status: statuses[0],
     image: 'assets/images/Architetto.png',
-    goals: [{name: 'Prima Casa', icon: 'home'}, 
-            {name: 'Moto', icon: 'motorcycle'}]},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
     {name: 'Cuoco',
     age: '31',
     status: statuses[1],
     image: 'assets/images/Cuoco.png',
-    goals: [{name: 'Prima Casa', icon: 'home'}, 
-            {name: 'Ristorante', icon: 'cutlery'}]},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
     {name: 'Commesso',
     age: '21',
     status: statuses[1],
     image: 'assets/images/Commesso.png',
-    goals: [{name: 'Prima Casa', icon: 'home'}, 
-            {name: 'Ristorante', icon: 'cutlery'}]},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
     {name: 'Manager',
     age: '41',
     status: statuses[0],
     image: 'assets/images/Manager.png',
-    goals: [{name: 'Prima Casa', icon: 'home'}, 
-            {name: 'Ristorante', icon: 'cutlery'}, 
-            {name: 'Ristorante', icon: 'cutlery'}, 
-            {name: 'Ristorante', icon: 'cutlery'}]},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 55}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 60}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 65}]},
     {name: 'Elettricista',
     age: '39',
     status: statuses[0],
     image: 'assets/images/Elettricista.png',
-    goals: [{name: 'Prima Casa', icon: 'home'}, 
-            {name: 'Ristorante', icon: 'cutlery'}]},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
     {name: 'Consulente',
     age: '49',
     status: statuses[0],
     image: 'assets/images/Consulente.png',
-    goals: [{name: 'Prima Casa', icon: 'home'}, 
-            {name: 'Ristorante', icon: 'cutlery'}]}
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
+            {name: 'Auto', icon: 'motori/motori.png', age: 60}]}
   ];
   var data = {};
   data.results = avatars;
@@ -115,6 +115,68 @@ router.get('/getprofile', function(req, res, next) {
   profileId = req.query.id;
   var data = {};
   data.results = storedProfiles[profileId];
+  res.send(data);
+});
+
+/* GET goal type list. */
+router.get('/goaltypelist', function(req, res, next) {
+  var goaltypes = [
+    {code: '1', name: 'Immobili', icon: 'proprieta/immobili.png', age: 50}, 
+    {code: '2', name: 'Motori', icon: 'motori/motori.png', age: 60}, 
+    {code: '3', name: 'Viaggi', icon: 'viaggi/viaggi.png'}, 
+    {code: '4', name: 'Anniversari', icon: 'famiglia/famiglia.png'}, 
+    {code: '5', name: 'Collezioni', icon: 'collezioni/collezioni.png'}
+  ];
+  var data = {};
+  data.results = goaltypes;
+  res.send(data);
+});
+
+/* POST projection. */
+router.post('/projection', function(req, res, next) {
+  var profile = req.body;
+  console.log('profile for projection', profile);
+  var profileAge = parseInt(profile.age);
+  var years = 100 - profileAge;
+  var incoming = [];
+  var outgoing = [];
+  var saving = [];
+  for (var i = 0; i < years; i++) {
+    year = i + profileAge;
+    var yearlyIncoming = {
+      'name': year,
+      'value': Math.sin(i/70)*50
+    };
+    incoming.push(yearlyIncoming);
+    var yearlyOutgoing = {
+      'name': year,
+      'value': Math.cos(i/70)*50
+    };
+    outgoing.push(yearlyOutgoing);
+    var yearlySaving = {
+      'name': year,
+      'value': Math.tan(i/70)*50
+    };
+    saving.push(yearlySaving);
+  }
+  var projection = [
+    {
+      "name": "Entrate",
+      "series": incoming
+    },
+  
+    {
+      "name": "Uscite",
+      "series": outgoing
+    },
+  
+    {
+      "name": "Risparmi",
+      "series": saving
+    }
+  ];
+  var data = {};
+  data.results = projection;
   res.send(data);
 });
 

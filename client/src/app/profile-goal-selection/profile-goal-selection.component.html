@@ -1,3 +1,6 @@
-<p>
-  profile-goal-selection works!
-</p>
+<ul class="goal-type-list">
+  <li draggable *ngFor="let goalType of goalTypes"  [dragData]="goalType" class="goal-type">
+    <img [src]="getIcon(goalType)">
+    <span class="goal-type-label">{{goalType.name}}</span>
+  </li>
+</ul> 
