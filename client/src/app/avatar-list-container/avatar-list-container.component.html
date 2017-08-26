@@ -17,7 +17,7 @@
             <span class="gender font">Donna</span>
           </div>
         </div>
-        <div class="left-bar-row gender label font">
+        <div class="left-bar-row label centered font">
           <md-select placeholder="Professione" class="select">
             <md-option>----</md-option>
             <md-option *ngFor="let job of jobList$ | async" [value]="job.code">{{ job.name }}</md-option>

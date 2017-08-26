@@ -28,6 +28,8 @@ import { ProfileGoalSelectionComponent } from './profile-goal-selection/profile-
 import { ProfilePlanComponent } from './profile-plan/profile-plan.component';
 import { ProfileGoalComponent } from './profile-plan/profile-goal.component';
 import {SessionService} from './shared/services/session.service';
+import { ProfileCurrentStateComponent } from './profile-current-state/profile-current-state.component';
+import { SliderComponent } from './shared/components/slider/slider.component';
 
 const appRoutes: Routes = [
   {
@@ -59,7 +61,9 @@ const appRoutes: Routes = [
     ProfileSummaryComponent,
     ProfileGoalSelectionComponent,
     ProfilePlanComponent,
-    ProfileGoalComponent
+    ProfileGoalComponent,
+    ProfileCurrentStateComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

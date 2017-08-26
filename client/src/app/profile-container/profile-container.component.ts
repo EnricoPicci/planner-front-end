@@ -21,6 +21,11 @@ export class ProfileContainerComponent implements OnInit {
   ngOnInit() {
     this.profile = this.session.profile;
     this.goalTypes$ = this.backendHttpService.getGoalTypeList();
+    // this.projection$ = this.backendHttpService.getProjection(this.profile);
+    this.getProjection();
+  }
+
+  getProjection() {
     this.projection$ = this.backendHttpService.getProjection(this.profile);
   }
 

@@ -23,16 +23,16 @@ export class ProfilePlanComponent implements OnInit {
   @ViewChild('chart') chart;
   @ViewChild(LineSeriesComponent) lineSeriesComponent;
 
-  // view: any[] = [700, 200];
+  view: any[] = [900, 260];
   // options
   showXAxis = true;
   showYAxis = true;
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Anni';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Valore';
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
@@ -73,21 +73,6 @@ export class ProfilePlanComponent implements OnInit {
       age: goalYear
     };
     this.profile.goals.push(goal);
-    // const left = this.chartdiv.nativeElement.getBoundingClientRect().left;
-    // const right = this.chartdiv.nativeElement.getBoundingClientRect().right;
-    // const width = right - left;
-    // const dropX = event.nativeEvent.clientX;
-    // console.log('drop event %', (dropX - left) / width *  100);
-    // console.log('drop event', event);
-    // console.log('drop event', left, right, width, dropX);
-    // console.log('getBoundingClientRect()', this.chartdiv.nativeElement.getBoundingClientRect());
-    // console.log('chartdiv', this.chartdiv);
-    // console.log('lineSeriesComponent', this.lineSeriesComponent);
-    // console.log('chart', this.chart);
-    // console.log('chart element', this.chart.chartElement);
-    // console.log('chart element rect', this.chart.chartElement.nativeElement.getBoundingClientRect());
-    // console.log('getContainerDims()', this.chart.getContainerDims());
-    // console.log('chart dims', this.chart.dims);
   }
 
   onSelect(event) {
@@ -110,7 +95,6 @@ export class ProfilePlanComponent implements OnInit {
     if (this.chart) {
       chartWidth = this.chart.dims.width;
     }
-    // const chartWidth = this.chart.dims.width;
     // tslint:disable-next-line:radix
     const age = parseInt(this.profile.age);
     const ageXOffset = (goal.age - age) / (100 - age) * chartWidth;
@@ -122,12 +106,7 @@ export class ProfilePlanComponent implements OnInit {
     if (this.chart) {
       offsetX = this.chart.dims.xOffset;
     }
-    // const left = this.chartdiv.nativeElement.getBoundingClientRect().left;
-    // const offsetX = this.chart.dims.xOffset;
-    // it is not clear why, but it seems that there is a filler of 15 to be considered to calculate the X position of the chart
-    const filler = 0;
-    // calculate where the area of the chart starts
-    return offsetX + filler;
+    return offsetX;
   }
   private getChartdivXOffest() {
     let left = 0;

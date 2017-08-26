@@ -25,6 +25,11 @@ var statuses = [
 var storedProfiles = {};
 var nextProfileID = 0;
 
+/* generate random numbers */
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 /* GET job list. */
 router.get('/joblist', function(req, res, next) {
   var jobs = [
@@ -141,21 +146,24 @@ router.post('/projection', function(req, res, next) {
   var incoming = [];
   var outgoing = [];
   var saving = [];
+
+  var randomNumber = getRandomArbitrary(30, 70);
+  
   for (var i = 0; i < years; i++) {
     year = i + profileAge;
     var yearlyIncoming = {
       'name': year,
-      'value': Math.sin(i/70)*50
+      'value': Math.sin(i/randomNumber)*50
     };
     incoming.push(yearlyIncoming);
     var yearlyOutgoing = {
       'name': year,
-      'value': Math.cos(i/70)*50
+      'value': Math.cos(i/randomNumber)*50
     };
     outgoing.push(yearlyOutgoing);
     var yearlySaving = {
       'name': year,
-      'value': Math.tan(i/70)*50
+      'value': Math.tan(i/randomNumber)*50
     };
     saving.push(yearlySaving);
   }
