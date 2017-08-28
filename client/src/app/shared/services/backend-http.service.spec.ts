@@ -26,21 +26,30 @@ describe('BackendHttpService', () => {
     expect(backendHttpService).toBeTruthy();
     done();
   });
-  it('should read the list of avatars', done => {
-    backendHttpService.getAvatarList().subscribe(results => {
+  it('should read the list of all avatars', done => {
+    backendHttpService.getAllAvatars().subscribe(results => {
       expect(results.length).toBe(6);
       done();
     });
   });
   it('should read the list of goals of one Avatar', done => {
-    backendHttpService.getAvatarList().subscribe(results => {
+    backendHttpService.getAllAvatars().subscribe(results => {
       expect(results[0].goals.length).toBe(2);
       done();
     });
   });
   it('should read the status of one Avatar', done => {
-    backendHttpService.getAvatarList().subscribe(results => {
+    backendHttpService.getAllAvatars().subscribe(results => {
       expect(results[0].status.code).toBe('1');
+      done();
+    });
+  });
+
+  it('should read the list of avatars for a profile', done => {
+    const profile = getProfile();
+    backendHttpService.getAvatarsForProfile(profile).subscribe(results => {
+      expect(results.length).toBeGreaterThan(0);
+      expect(results.length).toBeLessThan(6);
       done();
     });
   });

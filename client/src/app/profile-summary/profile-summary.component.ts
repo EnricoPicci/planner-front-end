@@ -29,7 +29,7 @@ export class ProfileSummaryComponent implements OnInit {
   }
 
   createForm(profile: ProfileInterface) {
-    const status: any = profile.status;
+    const status = profile.status;
     this.profileForm = this.fb.group({
       firstName: profile.firstName,
       lastName: profile.lastName,

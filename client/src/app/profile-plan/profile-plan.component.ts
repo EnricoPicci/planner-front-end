@@ -7,6 +7,7 @@ import { DropEvent } from 'ng2-drag-drop';
 import {GoalTypeInterface} from '../shared/model/goal-type.interface';
 import {GoalInterface} from '../shared/model/goal.interface';
 import {ProfileInterface} from '../shared/model/profile.interface';
+import {SessionService} from '../shared/services/session.service';
 
 @Component({
   selector: 'planner-profile-plan',
@@ -38,13 +39,12 @@ export class ProfilePlanComponent implements OnInit {
   };
   autoScale = true;
 
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef, private session: SessionService) { }
 
   ngOnInit() {
   }
 
   onDrop(event: DropEvent) {
-    const goalType: GoalTypeInterface = event.dragData;
     // X position of the drop event
     const dropX = event.nativeEvent.clientX;
     const chartWidth = this.chart.dims.width;
@@ -63,16 +63,33 @@ export class ProfilePlanComponent implements OnInit {
     }
     // tslint:disable-next-line:radix
     const age = parseInt(this.profile.age);
-    const goalYear = (goalPositionX / chartWidth) * (100 - age) + age;
-    console.log ('goalPositionX', goalPositionX);
-    console.log ('goalYear', this.round(goalYear));
+    const goalYear = this.round((goalPositionX / chartWidth) * (100 - age)) + age;
 
-    const goal: GoalInterface = {
-      name: goalType.name,
-      icon: goalType.icon,
-      age: goalYear
-    };
-    this.profile.goals.push(goal);
+    let goal: GoalInterface;
+    if (this.isGoalType(event.dragData)) {
+      const goalType: GoalTypeInterface = event.dragData;
+      goal = {
+        name: goalType.name,
+        icon: goalType.icon,
+        age: goalYear,
+        value: null,
+        cashComponent: 0,
+        debtComponent: 0,
+        debtDuration: 0,
+        debtInterest: 0,
+        investmentComponent: 0,
+        investmentInterest: 0
+      };
+      this.profile.goals.push(goal);
+    } else {
+      goal = event.dragData;
+      goal.age = goalYear;
+    }
+    this.session.goalSelectedChanged(goal);
+  }
+  // return true if the object passed in as parameter is of type GoalTypeInterface, otherwise false
+  private isGoalType(goalOrGoalType) {
+    return goalOrGoalType.code !== undefined;
   }
 
   onSelect(event) {

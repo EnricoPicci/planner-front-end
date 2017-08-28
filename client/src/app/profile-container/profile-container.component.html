@@ -4,7 +4,7 @@
         <div class="profile-summary" fxFlex>
           <planner-profile-summary [profile]="profile"></planner-profile-summary>
         </div>
-        <div class="container1" fxLayout="row" fxFlex>
+        <div class="container container1" fxLayout="row" fxFlex>
           <div class="section left-bar" fxFlex="1 1 20%">     
             <div class="section-header">
               <h4 class="font section-title">Obiettivi</h4>
@@ -45,6 +45,22 @@
             </div> -->
             <div fxFlex="1 1 70%">
               <planner-profile-current-state [profile]="profile"></planner-profile-current-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="container container3" fxFlex>
+          <div class="section" fxLayout="column" fxFlex>
+            <div fxFlex="1 1 20%" class="section-header">
+              <h4 class="font section-title">Obiettivi</h4>
+            </div>
+            <div fxFlex="1 1 20%" class="goal-bar" fxLayout="row" fxLayoutAlign="space-around center">
+                <planner-profile-goal fxFlex *ngFor="let goal of profile.goals" 
+                    [goal]="goal" (close)="delete(goal)">
+                </planner-profile-goal>
+            </div>
+            <div fxFlex="1 1 80%">
+              <planner-profile-goal-details [goal]="goalSelected" [profile]="profile"></planner-profile-goal-details>
             </div>
           </div>
         </div>

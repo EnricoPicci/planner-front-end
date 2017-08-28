@@ -1,0 +1,15 @@
+.goal-details {
+    border-style: solid;
+    border-width: thin;
+    border-color: lightgray;
+    padding: 20px;
+    margin: 20px;
+}
+
+.row1 {
+    margin-bottom: 30px;
+}
+
+.row2 {
+    font-size: x-small;
+}

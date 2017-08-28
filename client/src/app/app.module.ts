@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {MdSidenavModule, MdToolbarModule, MdIconModule, MdCardModule,
         MdSelectModule, MdSliderModule, MdGridListModule, MdButtonModule,
-        MdCheckboxModule, MdInputModule} from '@angular/material';
+        MdCheckboxModule, MdInputModule, MdTooltipModule, MdDialogModule} from '@angular/material';
 import 'hammerjs';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -30,6 +30,7 @@ import { ProfileGoalComponent } from './profile-plan/profile-goal.component';
 import {SessionService} from './shared/services/session.service';
 import { ProfileCurrentStateComponent } from './profile-current-state/profile-current-state.component';
 import { SliderComponent } from './shared/components/slider/slider.component';
+import { ProfileGoalDetailsComponent } from './profile-goal-details/profile-goal-details.component';
 
 const appRoutes: Routes = [
   {
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     ProfilePlanComponent,
     ProfileGoalComponent,
     ProfileCurrentStateComponent,
-    SliderComponent
+    SliderComponent,
+    ProfileGoalDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +86,8 @@ const appRoutes: Routes = [
     MdInputModule,
     MdButtonModule,
     MdCheckboxModule,
+    MdTooltipModule,
+    MdDialogModule,
     FlexLayoutModule,
     Ng2DragDropModule.forRoot(),
     NgxChartsModule

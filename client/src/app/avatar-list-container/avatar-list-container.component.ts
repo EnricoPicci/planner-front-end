@@ -23,7 +23,7 @@ export class AvatarListContainerComponent implements OnInit {
   constructor(private backendHttpService: BackendHttpService) { }
 
   ngOnInit() {
-    this.avatarList$ = this.backendHttpService.getAvatarList();
+    this.avatarList$ = this.backendHttpService.getAllAvatars();
     this.jobList$ = this.backendHttpService.getJobList();
     this.age = this.startAge;
     this.income = this.startIncome;

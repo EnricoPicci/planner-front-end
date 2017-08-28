@@ -1,14 +1,14 @@
 <div fxLayout="column" fxFlex style="padding: 10px">
-  <div>{{title + ' - ' + value}}</div>
+  <div>{{getTitleValue()}}</div>
   <div>
       <div class="slider">
-        <md-slider fxFlex="1 1 80%"
+        <md-slider fxFlex="1 1 90%"
             [max]="max"
             [min]="min"
             [step]="step"
             [thumb-label]="true"
             [tick-interval]="5"
-            [value]="initialValue"
+            [value]="getValue()"
             (change)="onValueChanged($event)">
         </md-slider>
       </div>

@@ -1,20 +1,20 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { SliderComponent } from './slider.component';
+// import { ProfileGoalDetailsComponent } from './profile-goal-details.component';
 
-// describe('SliderComponent', () => {
-//   let component: SliderComponent;
-//   let fixture: ComponentFixture<SliderComponent>;
+// describe('ProfileGoalDetailsComponent', () => {
+//   let component: ProfileGoalDetailsComponent;
+//   let fixture: ComponentFixture<ProfileGoalDetailsComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [ SliderComponent ]
+//       declarations: [ ProfileGoalDetailsComponent ]
 //     })
 //     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(SliderComponent);
+//     fixture = TestBed.createComponent(ProfileGoalDetailsComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

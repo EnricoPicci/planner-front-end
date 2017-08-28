@@ -14,11 +14,53 @@ router.use(function (req, res, next) {
   next();
 });
 
+
 /* set constants */
 var statuses = [
   {code: '1', name: 'Sposato'},
   {code: '2', name: 'Celibe'},
   {code: '3', name: 'Divorziato'}
+];
+/* set Avatars */
+var avatars = [
+  {name: 'Architetto',
+  age: 37,
+  status: statuses[0],
+  image: 'assets/images/Architetto.png',
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  {name: 'Cuoco',
+  age: 31,
+  status: statuses[1],
+  image: 'assets/images/Cuoco.png',
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  {name: 'Commesso',
+  age: 21,
+  status: statuses[1],
+  image: 'assets/images/Commesso.png',
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  {name: 'Manager',
+  age: 41,
+  status: statuses[0],
+  image: 'assets/images/Manager.png',
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 55, value: 10000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 65, value: 30000}]},
+  {name: 'Elettricista',
+  age: 39,
+  status: statuses[0],
+  image: 'assets/images/Elettricista.png',
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  {name: 'Consulente',
+  age: 49,
+  status: statuses[0],
+  image: 'assets/images/Consulente.png',
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]}
 ];
 
 /* crete hash to store profiles and a variable to store next profile ID */
@@ -48,48 +90,20 @@ router.get('/joblist', function(req, res, next) {
 
 /* GET avatar list. */
 router.get('/avatarlist', function(req, res, next) {
-  var avatars = [
-    {name: 'Architetto',
-    age: '37',
-    status: statuses[0],
-    image: 'assets/images/Architetto.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
-    {name: 'Cuoco',
-    age: '31',
-    status: statuses[1],
-    image: 'assets/images/Cuoco.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
-    {name: 'Commesso',
-    age: '21',
-    status: statuses[1],
-    image: 'assets/images/Commesso.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
-    {name: 'Manager',
-    age: '41',
-    status: statuses[0],
-    image: 'assets/images/Manager.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 55}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 60}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 65}]},
-    {name: 'Elettricista',
-    age: '39',
-    status: statuses[0],
-    image: 'assets/images/Elettricista.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 60}]},
-    {name: 'Consulente',
-    age: '49',
-    status: statuses[0],
-    image: 'assets/images/Consulente.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50}, 
-            {name: 'Auto', icon: 'motori/motori.png', age: 60}]}
-  ];
   var data = {};
   data.results = avatars;
+  res.send(data);
+});
+/* POST request to get Avatar list for a certain profile. */
+router.post('/avatars4profile', function(req, res, next) {
+  var profile = req.body;
+  console.log('profile to retrieve list of avatars', profile);
+  var data = {};
+  if (profile.age < 35) {
+    data.results = avatars.filter(avatar => avatar.age <= 40);
+  } else {
+    data.results = avatars.filter(avatar => avatar.age > 40);
+  }
   res.send(data);
 });
 
@@ -126,8 +140,8 @@ router.get('/getprofile', function(req, res, next) {
 /* GET goal type list. */
 router.get('/goaltypelist', function(req, res, next) {
   var goaltypes = [
-    {code: '1', name: 'Immobili', icon: 'proprieta/immobili.png', age: 50}, 
-    {code: '2', name: 'Motori', icon: 'motori/motori.png', age: 60}, 
+    {code: '1', name: 'Immobili', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
+    {code: '2', name: 'Motori', icon: 'motori/motori.png', age: 60, value: 20000}, 
     {code: '3', name: 'Viaggi', icon: 'viaggi/viaggi.png'}, 
     {code: '4', name: 'Anniversari', icon: 'famiglia/famiglia.png'}, 
     {code: '5', name: 'Collezioni', icon: 'collezioni/collezioni.png'}
@@ -147,7 +161,7 @@ router.post('/projection', function(req, res, next) {
   var outgoing = [];
   var saving = [];
 
-  var randomNumber = getRandomArbitrary(30, 70);
+  var randomNumber = getRandomArbitrary(20, 40);
   
   for (var i = 0; i < years; i++) {
     year = i + profileAge;
@@ -158,12 +172,12 @@ router.post('/projection', function(req, res, next) {
     incoming.push(yearlyIncoming);
     var yearlyOutgoing = {
       'name': year,
-      'value': Math.cos(i/randomNumber)*50
+      'value': Math.cos(i/(randomNumber*1.5))*20
     };
     outgoing.push(yearlyOutgoing);
     var yearlySaving = {
       'name': year,
-      'value': Math.tan(i/randomNumber)*50
+      'value': Math.tan(i/(randomNumber*3))*50
     };
     saving.push(yearlySaving);
   }

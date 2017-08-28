@@ -15,8 +15,11 @@ export class ProfileCurrentStateComponent implements OnInit {
   ngOnInit() {
   }
 
-  initialCapitalChanged(event) {
-    this.profile.initialCapital = event.value;
+  initialCapitalChanged(value) {
+    this.profile.initialCapital = value;
+  }
+  annualSavingsChanged(value) {
+    this.profile.yearlySavings = value;
   }
 
 }

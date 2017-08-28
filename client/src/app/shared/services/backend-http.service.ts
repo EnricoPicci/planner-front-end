@@ -16,9 +16,14 @@ export class BackendHttpService {
 
   constructor(private http: HttpClient) { }
 
-  getAvatarList() {
+  getAllAvatars() {
     const url = this.apiurl + 'avatarlist';
     return this.http.get<Array<AvatarInterface>>(url)
+                      .map(data => data['results']);
+  }
+  getAvatarsForProfile(profile: ProfileInterface) {
+    const url = this.apiurl + 'avatars4profile';
+    return this.http.post<Array<AvatarInterface>>(url, profile)
                       .map(data => data['results']);
   }
 

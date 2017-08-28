@@ -33,7 +33,7 @@ export class AvatarComponent implements OnInit {
   }
 
   onClick() {
-    this.session.profile = this.getProfileFromAvatar();
+    this.session.setProfile(this.getProfileFromAvatar());
     this.router.navigate(['profile']);
   }
 
