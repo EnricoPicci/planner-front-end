@@ -92,18 +92,20 @@ router.get('/joblist', function(req, res, next) {
 router.get('/avatarlist', function(req, res, next) {
   var data = {};
   data.results = avatars;
+  console.log('avatars  returned', data.results);
   res.send(data);
 });
 /* POST request to get Avatar list for a certain profile. */
 router.post('/avatars4profile', function(req, res, next) {
   var profile = req.body;
-  console.log('profile to retrieve list of avatars', profile);
+  console.log('params to retrieve list of avatars', profile);
   var data = {};
   if (profile.age < 35) {
     data.results = avatars.filter(avatar => avatar.age <= 40);
   } else {
     data.results = avatars.filter(avatar => avatar.age > 40);
   }
+  console.log('avatars  returned', data.results);
   res.send(data);
 });
 
@@ -119,23 +121,37 @@ router.get('/statuslist', function(req, res, next) {
 router.put('/saveprofile', function(req, res, next) {
   var profile = req.body;
   var profileId = profile.id;
-  if (!profileId) {
-    profileId = nextProfileID;
+  if (profileId === null) {
+    profile.id = nextProfileID;
     nextProfileID++;
   }
-  storedProfiles[profileId] = profile;
+  storedProfiles[profile.id] = profile;
   console.log('stored profiles', storedProfiles);
   var data = {};
-  data.results = profileId;
+  data.results = profile.id;
   res.send(data);
 });
 /* GET profile. */
 router.get('/getprofile', function(req, res, next) {
   profileId = req.query.id;
+  console.log('profile id requested', profileId);
   var data = {};
   data.results = storedProfiles[profileId];
+  console.log('profile returned', data.results);
   res.send(data);
 });
+/* GET all profiles */
+router.get('/getallprofiles', function(req, res, next) {
+  var allProfilesArray = [];
+  for(profileId in storedProfiles) {
+    allProfilesArray.push(storedProfiles[profileId]);
+  }
+  var data = {};
+  data.results = allProfilesArray;
+  res.send(data);
+  console.log('get all saved profiles', allProfilesArray);
+});
+
 
 /* GET goal type list. */
 router.get('/goaltypelist', function(req, res, next) {
@@ -199,6 +215,7 @@ router.post('/projection', function(req, res, next) {
   ];
   var data = {};
   data.results = projection;
+  console.log('Risultati pianificazione', JSON.stringify(data.results));
   res.send(data);
 });
 

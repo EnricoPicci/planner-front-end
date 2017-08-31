@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { BackendHttpService } from './backend-http.service';
 import {ProfileInterface} from '../model/profile.interface';
+import {AvatarSelectionParamsInterface} from '../model/avatar-selection-params.interface';
 
 describe('BackendHttpService', () => {
   let backendHttpService: BackendHttpService;
@@ -46,8 +47,10 @@ describe('BackendHttpService', () => {
   });
 
   it('should read the list of avatars for a profile', done => {
-    const profile = getProfile();
-    backendHttpService.getAvatarsForProfile(profile).subscribe(results => {
+    const params: AvatarSelectionParamsInterface = {
+      age: 30
+    };
+    backendHttpService.getAvatarsForProfile(params).subscribe(results => {
       expect(results.length).toBeGreaterThan(0);
       expect(results.length).toBeLessThan(6);
       done();
@@ -86,6 +89,33 @@ describe('BackendHttpService', () => {
                       .switchMap(profileId => backendHttpService.getProfile(profileId))
                       .subscribe(results => {
                         expect(results.firstName).toBe(profile.firstName);
+                        done();
+                      });
+  });
+  it('saves a profile, then read again the same profile and save it again', done => {
+    const profile = getProfile();
+    let profileIdReadFirstTime;
+    backendHttpService.saveProfile(profile)
+                      .switchMap(profileId => {
+                        profileIdReadFirstTime = profileId;
+                        return backendHttpService.getProfile(profileId);
+                      })
+                      .switchMap(profileRead => backendHttpService.saveProfile(profile))
+                      .subscribe(profileIdReceivedSecondTime => {
+                        expect(profileIdReceivedSecondTime).toBe(profileIdReadFirstTime);
+                        done();
+                      });
+  });
+  it('saves a profile and then read all the profiles to find the saved one as the last', done => {
+    const profile = getProfile();
+    backendHttpService.saveProfile(profile)
+                      .switchMap(profileId => backendHttpService.getAllProfiles()
+                                              .map(allProfiles => [allProfiles, profileId] ))
+                      .subscribe(results => {
+                        console.log(results);
+                        const allProfiles = results[0];
+                        const profileId = results[1];
+                        expect(allProfiles[profileId].firstName).toBe(profile.firstName);
                         done();
                       });
   });

@@ -9,28 +9,35 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 export class SliderComponent implements OnInit {
   @Input() title: string;
   @Input() min = 0;
-  @Input() max: number;
-  @Input() initialValue: number;
-  @Input() step;
+  @Input() value: number;
+  @Input() step: number;
+  _max: number;
 
   @Output() valueChanged = new EventEmitter<number>();
 
-  value: number;
+  @Input()
+  get max() {
+    return this._max;
+  }
+  set max(data: number) {
+    this._max = data;
+    this.initializeStep();
+  }
+
+  // value: number;
 
   constructor() { }
 
   ngOnInit() {
-    if (this.initialValue) {
-      this.value = this.initialValue;
-    } else {
+    if (!this.value) {
       this.value = this.min;
     }
-
-    if (!this.step) {
-      const range = this.max - this.min;
-      if (range > 0) {
-        this.step = range / 50;
-      }
+    this.initializeStep();
+  }
+  initializeStep() {
+    const range = this._max - this.min;
+    if (range > 0 && !this.step) {
+      this.step = range / 50;
     }
   }
 
@@ -43,15 +50,15 @@ export class SliderComponent implements OnInit {
 
   getTitleValue() {
     let ret = this.title;
-    if (this.initialValue) {
-      ret = ret + ' - ' + this.initialValue;
+    if (this.value) {
+      ret = ret + ' - ' + this.value;
     }
     return ret;
   }
 
   getValue() {
-    let ret = this.initialValue;
-    if (!this.initialValue) {
+    let ret = this.value;
+    if (!this.value) {
       ret = 0;
     }
     return ret;

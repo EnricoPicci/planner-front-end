@@ -40,4 +40,8 @@ export class ProfileContainerComponent implements OnInit {
     this.session.goalSelectedChanged(this.profile.goals[0]);
   }
 
+  getProfileGoals() {
+    return this.profile.goals.sort((a, b) => a.age < b.age ? -1 : 1 );
+  }
+
 }

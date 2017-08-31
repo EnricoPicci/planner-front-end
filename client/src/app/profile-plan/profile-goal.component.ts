@@ -6,13 +6,12 @@ import {environment} from '../../environments/environment';
 
 import {GoalInterface} from '../shared/model/goal.interface';
 import {SessionService} from '../shared/services/session.service';
-import {ProfileGoalDialogComponent} from './profile-goal-dialog.component';
 
 @Component({
   selector: 'planner-profile-goal',
   template: `
-    <div *ngIf="xOffset" (click)="onClick()" draggable [dragData]="goal">
-      <img [src]="getIcon()" style="position: absolute; top: 0px" [style.left]="getXOffset()" [class.selectedImg]="selected"
+    <div *ngIf="xOffset" (click)="onClick()" draggable [dragData]="goal" [dragImage] = "getIcon()">
+      <img [src]="getIcon()" style="position: absolute; top: -10px" [style.left]="getXOffset()" [class.selectedImg]="selected"
           mdTooltip="{{getTooltip()}}" [mdTooltipPosition]="'above'">
     </div>
     <div *ngIf="!xOffset" class="tab" [class.selected]="selected" (click)="onClick()">
@@ -30,7 +29,7 @@ import {ProfileGoalDialogComponent} from './profile-goal-dialog.component';
         border-style: solid;
       }`,
     `.selectedImg {
-        padding: 10px;
+        padding: 5px;
         background-color: lightgray;
         border-width: thin;
         border-style: solid;
@@ -45,7 +44,11 @@ import {ProfileGoalDialogComponent} from './profile-goal-dialog.component';
     `.close {
         float: right;
         cursor: pointer;
-    }`
+    }`,
+    `::ng-deep .drag-border {
+      border: #ff525b none 0px;
+    }
+    `
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

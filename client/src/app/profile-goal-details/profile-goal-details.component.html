@@ -14,7 +14,7 @@
         </div>
         <div fxFlex="1 1 30%">
           <planner-slider [title]="'Età'" [min]="profile.age" [max]="100" 
-                          [step]="1" [initialValue]="goal.age"
+                          [step]="1" [value]="goal.age"
                           (valueChanged)="ageChanged($event)">
           </planner-slider>
         </div>
@@ -22,38 +22,38 @@
       <div class="row2" fxLayout="row" fxFlex="1 1 100%" fxLayoutAlign="space-around center">
         <div fxFlex>
           <planner-slider [title]="'Parte Liquida'" [min]="0" [max]="goal.value" 
-                          [initialValue]="goal.cashComponent"
+                          [value]="goal.cashComponent"
                           (valueChanged)="cashComponentChanged($event)">
           </planner-slider>
         </div>
         <div fxFlex>
           <planner-slider [title]="'Parte Finanziata'" [min]="0" [max]="goal.value" 
-                          [initialValue]="goal.debtComponent"
+                          [value]="goal.debtComponent"
                           (valueChanged)="debtComponentChanged($event)">
           </planner-slider>
         </div>
         <div fxFlex>
           <planner-slider [title]="'Interessi Finanziamento'" [min]="0" [max]="20" 
-                          [initialValue]="goal.debtInterest" [step]="0.1"
+                          [value]="goal.debtInterest" [step]="0.1"
                           (valueChanged)="debtInterestChanged($event)">
           </planner-slider>
         </div>
         <div fxFlex>
           <planner-slider [title]="'Anni Finanziamento'" [min]="0" [max]="50" 
-                      [initialValue]="goal.debtDuration"
-                      (valueChanged)="debtDurationChanged($event)">
+                          [value]="goal.debtDuration"
+                          (valueChanged)="debtDurationChanged($event)">
           </planner-slider>
         </div>
         <div fxFlex>
           <planner-slider [title]="'Parte con investimento'" [min]="0" [max]="goal.value" 
-                      [initialValue]="goal.investmentComponent"
-                      (valueChanged)="investmentComponentChanged($event)">
+                          [value]="goal.investmentComponent"
+                          (valueChanged)="investmentComponentChanged($event)">
           </planner-slider>
         </div>
         <div fxFlex>
           <planner-slider [title]="'Interesse di investimento'" [min]="0" [max]="20" 
-                      [initialValue]="goal.investmentInterest" [step]="0.1"
-                      (valueChanged)="investmentInterestChanged($event)">
+                          [value]="goal.investmentInterest" [step]="0.1"
+                          (valueChanged)="investmentInterestChanged($event)">
           </planner-slider>
         </div>
       </div>

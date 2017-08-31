@@ -29,9 +29,6 @@ export class ProfileGoalDetailsComponent implements OnInit, OnChanges {
     this.goalForm.valueChanges.subscribe(formValues => {
       this.goal.value = this.goalForm.value.value;
       this.goal.name = this.goalForm.value.name;
-      // reset the values of cash and investment if the value of the goal changes
-      this.goal.cashComponent = this.goal.debtComponent = this.goal.debtInterest = this.goal.debtDuration = null;
-      this.goal.investmentComponent = this.goal.investmentInterest = null;
     });
   }
   createForm(goal: GoalInterface) {

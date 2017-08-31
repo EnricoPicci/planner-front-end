@@ -1,0 +1,30 @@
+<md-card>
+    <md-card-title class="font title">PROFILI SALVATI</md-card-title>
+    <md-card-subtitle class="font subtitle">I tuoi profili salvati</md-card-subtitle>
+    <md-card-content>
+      <div class="container container1">
+
+          <md-grid-list cols="6" rowHeight="2:3">
+            <md-grid-tile *ngFor="let profile of profileList">
+              
+              <div fxLayout="column">
+                <div class="profileImage" (click)="profileSelected(profile)" fxFlex="1 1 80%">
+                  <img src="assets/images/enrico1.jpg" class="image">
+                  <planner-goal-list [goals]="profile.goals" [over]="true" class="goals"></planner-goal-list>
+                </div>
+                <div fxFlex="1 1 20%">
+                  <h3 class="name">{{profile.firstName}}</h3>
+                  <p class="name">{{profile.lastName}}</p>
+                </div>
+              </div>
+                
+            </md-grid-tile>
+          </md-grid-list>
+
+      </div>
+    </md-card-content>
+    <md-card-footer class="font footer">
+      FFO
+    </md-card-footer>
+  </md-card>
+  

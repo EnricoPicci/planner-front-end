@@ -10,6 +10,24 @@
   cursor: pointer;
 }
 
+.sidebar {
+  background: #1C2B36;
+}
+.sidebar-item {
+  padding: 20px 10px 0 10px;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+}
+.sidebar-label {
+  padding: 10px 10px 25px 10px;
+  font-size: 12px;
+  display: block;
+  text-align: center;
+  position: relative;
+  color: antiquewhite;
+}
+
 /* html, body, planner-root, md-sidenav-container, .main-content {
   margin: 0;
   width: 100%;

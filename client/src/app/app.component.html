@@ -1,5 +1,21 @@
   <md-sidenav-container>
-    <md-sidenav #sidenav mode="side" opened="false">Drawer content</md-sidenav>
+
+    <md-sidenav class="sidebar" #sidenav mode="side" opened="false"  (mouseleave)="sidenav.opened = false">
+      <img src="assets/images/RAFBank.jpg">
+      <div class="sidebar-item" (click)="goToWall()">
+        <img src="assets/images/Wall.png">
+      </div>
+      <div class="sidebar-label font">
+        <span>Wall</span>
+      </div>
+      <div class="sidebar-item" (click)="goToProfiles()">
+        <img src="assets/images/ProfiliSalvati.png">
+      </div>
+      <div class="sidebar-label font">
+        <span>Profili salvati</span>
+      </div>
+    </md-sidenav>
+
     <div class="main-content">
       <md-toolbar>
         <md-icon class="toolbar-clickable-icon" (click)="sidenav.toggle()">menu</md-icon>

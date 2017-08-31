@@ -9,6 +9,7 @@ import {JobInterface} from '../model/job.interface';
 import {StatusInterface} from '../model/status.interface';
 import {ProfileInterface} from '../model/profile.interface';
 import {GoalTypeInterface} from '../model/goal-type.interface';
+import {AvatarSelectionParamsInterface} from '../model/avatar-selection-params.interface';
 
 @Injectable()
 export class BackendHttpService {
@@ -21,9 +22,9 @@ export class BackendHttpService {
     return this.http.get<Array<AvatarInterface>>(url)
                       .map(data => data['results']);
   }
-  getAvatarsForProfile(profile: ProfileInterface) {
+  getAvatarsForProfile(params: AvatarSelectionParamsInterface) {
     const url = this.apiurl + 'avatars4profile';
-    return this.http.post<Array<AvatarInterface>>(url, profile)
+    return this.http.post<Array<AvatarInterface>>(url, params)
                       .map(data => data['results']);
   }
 
@@ -42,12 +43,21 @@ export class BackendHttpService {
   saveProfile(profile: ProfileInterface) {
     const url = this.apiurl + 'saveprofile';
     return this.http.put(url, profile)
-                      .map(data => data['results']);
+                      .map(data => {
+                        const profileId = data['results'];
+                        profile.id = profileId;
+                        return profileId;
+                      });
   }
   getProfile(id: string) {
     const params = new HttpParams().set('id', id);
     const url = this.apiurl + 'getprofile';
     return this.http.get(url, {params})
+                      .map(data => data['results']);
+  }
+  getAllProfiles() {
+    const url = this.apiurl + 'getallprofiles';
+    return this.http.get(url)
                       .map(data => data['results']);
   }
 

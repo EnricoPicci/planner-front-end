@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import {LineSeriesComponent, LineChartComponent} from '@swimlane/ngx-charts';
 
@@ -24,7 +24,8 @@ export class ProfilePlanComponent implements OnInit {
   @ViewChild('chart') chart;
   @ViewChild(LineSeriesComponent) lineSeriesComponent;
 
-  view: any[] = [900, 260];
+  // view: any[] = [900, 260];
+  view: any[];
   // options
   showXAxis = true;
   showYAxis = true;
@@ -39,9 +40,13 @@ export class ProfilePlanComponent implements OnInit {
   };
   autoScale = true;
 
-  constructor(private element: ElementRef, private session: SessionService) { }
+  constructor(private element: ElementRef, private session: SessionService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.session.selectedGoal$.subscribe(selectedGoal => this.cdr.detectChanges());
+    const dims = this.element.nativeElement.parentNode.getBoundingClientRect();
+    console.log('dims parent', dims);
+    this.view = [dims.width, dims.height];
   }
 
   onDrop(event: DropEvent) {

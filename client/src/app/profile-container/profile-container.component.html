@@ -5,8 +5,8 @@
           <planner-profile-summary [profile]="profile"></planner-profile-summary>
         </div>
         <div class="container container1" fxLayout="row" fxFlex>
-          <div class="section left-bar" fxFlex="1 1 20%">     
-            <div class="section-header">
+          <div class="section left-bar" fxLayout="column" fxFlex="245px">     
+            <div class="section-header" fxFlex="35px">
               <h4 class="font section-title">Obiettivi</h4>
             </div>
             <div class="section-row">
@@ -14,17 +14,18 @@
               </planner-profile-goal-selection>
             </div>
           </div>
-          <div class="section" fxFlex="1 1 80%">
-            <div class="section-header">
+          <div class="section" fxLayout="column" fxFlex>
+            <div class="section-header" fxFlex="35px" fxLayout="row">
               <h4 class="font section-title">Timeline</h4>
-              <div class="section-tools">
-                <h3 class="section-title">
-                  Aggiorna
-                </h3>
-                <i class="fa fa-refresh" (click)="getProjection()" style="cursor: pointer"></i>
+              <span fxFlex></span>
+              <!-- <div class="section-tools"> -->
+              <h4 class="section-title section-tools">
+                Aggiorna
+              </h4>
+              <i class="fa fa-refresh" (click)="getProjection()" style="cursor: pointer"></i>
+              <!-- </div> -->
             </div>
-            </div>
-            <div class="section-row">
+            <div class="section-row" fxFlex>
               <planner-profile-plan [projection]="projection$ | async" [profile]="profile"></planner-profile-plan>
             </div>
           </div>
@@ -32,18 +33,10 @@
 
         <div class="container container2" fxFlex>
           <div class="section" fxLayout="column" fxFlex>
-            <div fxFlex="1 1 30%" class="section-header">
+            <div fxFlex="35px" class="section-header">
               <h4 class="font section-title">Situazione Attuale</h4>
             </div>
-            <!-- <div fxFlex="1 1 70%" fxLayout="row">
-              <div fxFlex="1 1 50%">
-                <planner-slider [title]="'Liquidità iniziale'" [min]="0" [max]="100000" [initialValue]="0"></planner-slider>
-              </div>
-              <div fxFlex="1 1 50%">
-                <planner-slider [title]="'Risparmio annuale'" [min]="0" [max]="3000"></planner-slider>
-              </div>
-            </div> -->
-            <div fxFlex="1 1 70%">
+            <div fxFlex>
               <planner-profile-current-state [profile]="profile"></planner-profile-current-state>
             </div>
           </div>
@@ -51,15 +44,15 @@
 
         <div class="container container3" fxFlex>
           <div class="section" fxLayout="column" fxFlex>
-            <div fxFlex="1 1 20%" class="section-header">
+            <div fxFlex="35px" class="section-header">
               <h4 class="font section-title">Obiettivi</h4>
             </div>
-            <div fxFlex="1 1 20%" class="goal-bar" fxLayout="row" fxLayoutAlign="space-around center">
-                <planner-profile-goal fxFlex *ngFor="let goal of profile.goals" 
+            <div fxFlex="1 1 8%" class="goal-bar" fxLayout="row" fxLayoutAlign="space-around center">
+                <planner-profile-goal fxFlex *ngFor="let goal of getProfileGoals()" 
                     [goal]="goal" (close)="delete(goal)">
                 </planner-profile-goal>
             </div>
-            <div fxFlex="1 1 80%">
+            <div fxFlex="1 1 92%" *ngIf="goalSelected">
               <planner-profile-goal-details [goal]="goalSelected" [profile]="profile"></planner-profile-goal-details>
             </div>
           </div>

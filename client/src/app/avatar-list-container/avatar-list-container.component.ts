@@ -5,6 +5,7 @@ import {MdSliderChange} from '@angular/material';
 import { BackendHttpService } from '../shared/services/backend-http.service';
 import {AvatarInterface} from '../shared/model/avatar.interface';
 import {JobInterface} from '../shared/model/job.interface';
+import {AvatarSelectionParamsInterface} from '../shared/model/avatar-selection-params.interface';
 
 @Component({
   selector: 'planner-avatar-list-container',
@@ -35,6 +36,13 @@ export class AvatarListContainerComponent implements OnInit {
 
   incomeChanged(event: MdSliderChange) {
     this.income = event.value;
+  }
+
+  getAvatarsForProfile() {
+    const params: AvatarSelectionParamsInterface = {
+      age: this.age
+    };
+    this.avatarList$ = this.backendHttpService.getAvatarsForProfile(params);
   }
 
 }

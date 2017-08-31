@@ -31,6 +31,7 @@ import {SessionService} from './shared/services/session.service';
 import { ProfileCurrentStateComponent } from './profile-current-state/profile-current-state.component';
 import { SliderComponent } from './shared/components/slider/slider.component';
 import { ProfileGoalDetailsComponent } from './profile-goal-details/profile-goal-details.component';
+import { ProfileListContainerComponent } from './profile-list-container/profile-list-container.component';
 
 const appRoutes: Routes = [
   {
@@ -42,6 +43,11 @@ const appRoutes: Routes = [
     path: 'profile',
     component: ProfileContainerComponent,
     data: { title: 'Profile' }
+  },
+  {
+    path: 'profiles',
+    component: ProfileListContainerComponent,
+    data: { title: 'Profile List' }
   },
   { path: '',
     redirectTo: '/avatars',
@@ -65,7 +71,8 @@ const appRoutes: Routes = [
     ProfileGoalComponent,
     ProfileCurrentStateComponent,
     SliderComponent,
-    ProfileGoalDetailsComponent
+    ProfileGoalDetailsComponent,
+    ProfileListContainerComponent
   ],
   imports: [
     BrowserModule,

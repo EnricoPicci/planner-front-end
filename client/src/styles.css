@@ -46,8 +46,8 @@
     margin-right: -15px;
     padding-left: 30px;
     padding-right: 30px;
-    padding-top: 30px;
-    padding-bottom: 15px;
+    /* padding-top: 30px;
+    padding-bottom: 15px; */
 }
 .container.container1 {
     /* box-sizing: content-box;
@@ -58,13 +58,13 @@
     padding-right: 30px;
     padding-top: 30px;
     padding-bottom: 15px; */
-    min-height: 384px;
+    min-height: 400px;
 }
 .container.container2 {
-    min-height: 200px;
+    min-height: 140px;
 }
 .container.container3 {
-    min-height: 500px;
+    min-height: 350px;
 }
 
 .section {
@@ -85,16 +85,17 @@
     /* min-height: 50px; */
 }
 .section-title {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-top: -3px;
+    /* margin-bottom: 0; */
     font-size: 16px;
     color: inherit;
     font-weight: 300;
     /* text-align: center; */
 }
 .section-tools {
-    float: right;
-    margin-top: -20px;
+    /* float: right;
+    margin-top: -20px; */
+    margin-right: 4px;
 }
 .section-row {
     margin-top: 3rem;
