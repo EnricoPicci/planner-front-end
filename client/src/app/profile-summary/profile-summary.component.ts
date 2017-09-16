@@ -36,6 +36,10 @@ export class ProfileSummaryComponent implements OnInit {
       age: [profile.age, Validators.required],
       status: status.code
     });
+    this.profileForm.valueChanges.subscribe(formValues => {
+      this.profile.firstName = formValues.firstName;
+      this.profile.lastName = formValues.lastName;
+    });
   }
 
   saveProfile() {

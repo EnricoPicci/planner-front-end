@@ -21,5 +21,19 @@ export class ProfileCurrentStateComponent implements OnInit {
   annualSavingsChanged(value) {
     this.profile.yearlySavings = value;
   }
+  investmentThreasholdChanged(value) {
+    this.profile.investmentThreashold = value;
+  }
+  valueAtRiskChanged(value) {
+    this.profile.valueAtRisk = value;
+  }
+  planDurationChanged(value) {
+    this.profile.planDuration = value;
+  }
+
+  getMaxPlanDuration() {
+    // tslint:disable-next-line:radix
+    return 100 - parseInt(this.profile.age);
+  }
 
 }

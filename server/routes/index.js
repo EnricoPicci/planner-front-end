@@ -15,52 +15,81 @@ router.use(function (req, res, next) {
 });
 
 
-/* set constants */
+/* set statuses */
 var statuses = [
   {code: '1', name: 'Sposato'},
   {code: '2', name: 'Celibe'},
   {code: '3', name: 'Divorziato'}
 ];
+/* set goal types */
+var goaltypes = [
+  {code: '1', name: 'Immobili', icon: 'proprieta/immobili.png'}, 
+  {code: '2', name: 'Motori', icon: 'motori/motori.png'}, 
+  {code: '3', name: 'Viaggi', icon: 'viaggi/viaggi.png'}, 
+  {code: '4', name: 'Anniversari', icon: 'famiglia/famiglia.png'}, 
+  {code: '5', name: 'Collezioni', icon: 'collezioni/collezioni.png'}, 
+  {code: 'pip',
+    name: 'Piano Pensione',
+    icon: 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png'},
+  {code: 'pac',
+    name: 'Piano di Accumulo',
+    icon: 'ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png'},
+  {code: 'life-ins',
+    name: 'Protezione',
+    icon: 'ic_security_black_24dp/web/ic_security_black_24dp_1x.png'}
+];
+/* set job types */
+var jobs = [
+  {code: '1', name: 'Architetto'},
+  {code: '2', name: 'Cuoco'},
+  {code: '3', name: 'Impiegato'},
+  {code: '4', name: 'Commesso'},
+  {code: '5', name: 'Elettricista'},
+  {code: '6', name: 'Manager'},
+  {code: '7', name: 'Consulente'},
+];
 /* set Avatars */
+var propertyGoal = goaltypes.filter(goalType => goalType.code == '1')[0];
+var motorGoal = goaltypes.filter(goalType => goalType.code == '2')[0];
 var avatars = [
   {name: 'Architetto',
   age: 37,
   status: statuses[0],
   image: 'assets/images/Architetto.png',
-  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]},
   {name: 'Cuoco',
   age: 31,
   status: statuses[1],
   image: 'assets/images/Cuoco.png',
-  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]},
   {name: 'Commesso',
   age: 21,
   status: statuses[1],
   image: 'assets/images/Commesso.png',
-  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]},
   {name: 'Manager',
   age: 41,
   status: statuses[0],
   image: 'assets/images/Manager.png',
-  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 55, value: 10000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 65, value: 30000}]},
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 55, value: 10000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 65, value: 30000}]},
   {name: 'Elettricista',
   age: 39,
   status: statuses[0],
   image: 'assets/images/Elettricista.png',
-  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]},
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]},
   {name: 'Consulente',
   age: 49,
   status: statuses[0],
   image: 'assets/images/Consulente.png',
-  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
-          {name: 'Auto', icon: 'motori/motori.png', age: 60, value: 20000}]}
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000}, 
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]}
 ];
 
 /* crete hash to store profiles and a variable to store next profile ID */
@@ -74,15 +103,6 @@ function getRandomArbitrary(min, max) {
 
 /* GET job list. */
 router.get('/joblist', function(req, res, next) {
-  var jobs = [
-    {code: '1', name: 'Architetto'},
-    {code: '2', name: 'Cuoco'},
-    {code: '3', name: 'Impiegato'},
-    {code: '4', name: 'Commesso'},
-    {code: '5', name: 'Elettricista'},
-    {code: '6', name: 'Manager'},
-    {code: '7', name: 'Consulente'},
-  ];
   var data = {};
   data.results = jobs;
   res.send(data);
@@ -155,13 +175,6 @@ router.get('/getallprofiles', function(req, res, next) {
 
 /* GET goal type list. */
 router.get('/goaltypelist', function(req, res, next) {
-  var goaltypes = [
-    {code: '1', name: 'Immobili', icon: 'proprieta/immobili.png', age: 50, value: 100000}, 
-    {code: '2', name: 'Motori', icon: 'motori/motori.png', age: 60, value: 20000}, 
-    {code: '3', name: 'Viaggi', icon: 'viaggi/viaggi.png'}, 
-    {code: '4', name: 'Anniversari', icon: 'famiglia/famiglia.png'}, 
-    {code: '5', name: 'Collezioni', icon: 'collezioni/collezioni.png'}
-  ];
   var data = {};
   data.results = goaltypes;
   res.send(data);
@@ -170,7 +183,7 @@ router.get('/goaltypelist', function(req, res, next) {
 /* POST projection. */
 router.post('/projection', function(req, res, next) {
   var profile = req.body;
-  console.log('profile for projection', profile);
+  console.log('profile for projection', JSON.stringify(profile, undefined, 2));
   var profileAge = parseInt(profile.age);
   var years = 100 - profileAge;
   var incoming = [];
@@ -215,7 +228,7 @@ router.post('/projection', function(req, res, next) {
   ];
   var data = {};
   data.results = projection;
-  console.log('Risultati pianificazione', JSON.stringify(data.results));
+  // console.log('Risultati pianificazione', JSON.stringify(data.results));
   res.send(data);
 });
 

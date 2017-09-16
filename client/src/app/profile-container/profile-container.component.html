@@ -4,12 +4,31 @@
         <div class="profile-summary" fxFlex>
           <planner-profile-summary [profile]="profile"></planner-profile-summary>
         </div>
+
+        <div class="container" fxFlex [style.min-height]="showCurrentState ? '240px': '40px'">
+          <div class="section" fxLayout="column" fxFlex>
+            <div fxFlex="35px" class="section-header">
+              <h4 class="font section-title">Situazione Attuale</h4>
+              <span fxFlex></span>
+              <h4 class="section-title section-tools">
+                {{showCurrentState ? 'Chiudi': 'Apri'}}
+              </h4>
+              <i class="fa fa-angle-down" 
+                  [class.fa-angle-down]="showCurrentState" [class.fa-angle-up]="!showCurrentState"
+                  (click)="toggleCurrentState()" style="cursor: pointer"></i>
+            </div>
+            <div fxFlex *ngIf="showCurrentState">
+              <planner-profile-current-state [profile]="profile"></planner-profile-current-state>
+            </div>
+          </div>
+        </div>
+
         <div class="container container1" fxLayout="row" fxFlex>
           <div class="section left-bar" fxLayout="column" fxFlex="245px">     
             <div class="section-header" fxFlex="35px">
               <h4 class="font section-title">Obiettivi</h4>
             </div>
-            <div class="section-row">
+            <div>
               <planner-profile-goal-selection [goalTypes]="goalTypes$ | async">
               </planner-profile-goal-selection>
             </div>
@@ -25,19 +44,8 @@
               <i class="fa fa-refresh" (click)="getProjection()" style="cursor: pointer"></i>
               <!-- </div> -->
             </div>
-            <div class="section-row" fxFlex>
-              <planner-profile-plan [projection]="projection$ | async" [profile]="profile"></planner-profile-plan>
-            </div>
-          </div>
-        </div>
-
-        <div class="container container2" fxFlex>
-          <div class="section" fxLayout="column" fxFlex>
-            <div fxFlex="35px" class="section-header">
-              <h4 class="font section-title">Situazione Attuale</h4>
-            </div>
             <div fxFlex>
-              <planner-profile-current-state [profile]="profile"></planner-profile-current-state>
+              <planner-profile-plan [projection]="projection$ | async" [profile]="profile"></planner-profile-plan>
             </div>
           </div>
         </div>

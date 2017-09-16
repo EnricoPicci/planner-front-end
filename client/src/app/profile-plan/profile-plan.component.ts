@@ -71,11 +71,15 @@ export class ProfilePlanComponent implements OnInit {
     const goalYear = this.round((goalPositionX / chartWidth) * (100 - age)) + age;
 
     let goal: GoalInterface;
+    // if a GoalType is dropped, as a result of moving a GoalType into the drop area, then a new Goal is created
+    // otherwise if a Goal is dropped, as a result of moving around an already created Goal to change the year,
+    // then no new Goal is created
     if (this.isGoalType(event.dragData)) {
       const goalType: GoalTypeInterface = event.dragData;
       goal = {
         name: goalType.name,
         icon: goalType.icon,
+        type: goalType,
         age: goalYear,
         value: null,
         cashComponent: 0,

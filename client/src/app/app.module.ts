@@ -32,6 +32,10 @@ import { ProfileCurrentStateComponent } from './profile-current-state/profile-cu
 import { SliderComponent } from './shared/components/slider/slider.component';
 import { ProfileGoalDetailsComponent } from './profile-goal-details/profile-goal-details.component';
 import { ProfileListContainerComponent } from './profile-list-container/profile-list-container.component';
+import { ProfileGoalHouseComponent } from './profile-goal-house/profile-goal-house.component';
+import { ProfileGoalPacComponent } from './profile-goal-pac/profile-goal-pac.component';
+import { ProfileGoalLifeInsComponent } from './profile-goal-life-ins/profile-goal-life-ins.component';
+import { ProfileGoalPipComponent } from './profile-goal-pip/profile-goal-pip.component';
 
 const appRoutes: Routes = [
   {
@@ -72,7 +76,11 @@ const appRoutes: Routes = [
     ProfileCurrentStateComponent,
     SliderComponent,
     ProfileGoalDetailsComponent,
-    ProfileListContainerComponent
+    ProfileListContainerComponent,
+    ProfileGoalHouseComponent,
+    ProfileGoalPacComponent,
+    ProfileGoalLifeInsComponent,
+    ProfileGoalPipComponent
   ],
   imports: [
     BrowserModule,

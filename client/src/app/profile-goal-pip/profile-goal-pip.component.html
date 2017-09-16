@@ -1,0 +1,8 @@
+<div class="row2" fxLayout="row" fxFlex="1 1 100%">  
+  <div fxFlex="30%">
+    <planner-slider [title]="'Rata'" [min]="0" [max]="goal.value" 
+                    [value]="goal.debtYearlyRate"
+                    (valueChanged)="debtYearlyRateChanged($event)">
+    </planner-slider>
+  </div>
+</div>

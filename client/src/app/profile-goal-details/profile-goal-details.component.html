@@ -7,9 +7,9 @@
             <input mdInput placeholder="Obiettivo" formControlName="name">
           </md-input-container>
         </div>
-        <div fxFlex="1 1 30%">
+        <div fxFlex="1 1 30%" *ngIf="showValue()">
           <md-input-container class="form-label">
-            <input mdInput placeholder="Prezzo" formControlName="value">
+            <input mdInput placeholder="Valore" formControlName="value">
           </md-input-container>
         </div>
         <div fxFlex="1 1 30%">
@@ -19,7 +19,7 @@
           </planner-slider>
         </div>
       </div>
-      <div class="row2" fxLayout="row" fxFlex="1 1 100%" fxLayoutAlign="space-around center">
+      <!-- <div class="row2" fxLayout="row" fxFlex="1 1 100%" fxLayoutAlign="space-around center" *ngIf="isGeneric()">
         <div fxFlex>
           <planner-slider [title]="'Parte Liquida'" [min]="0" [max]="goal.value" 
                           [value]="goal.cashComponent"
@@ -56,7 +56,11 @@
                           (valueChanged)="investmentInterestChanged($event)">
           </planner-slider>
         </div>
-      </div>
+      </div> -->
+      <planner-profile-goal-house [goal]="goal" *ngIf="isHouse()"></planner-profile-goal-house>
+      <planner-profile-goal-pip [goal]="goal" *ngIf="isPip()"></planner-profile-goal-pip>
+      <planner-profile-goal-life-ins [goal]="goal" *ngIf="isLifeInsurance()"></planner-profile-goal-life-ins>
+      <planner-profile-goal-pac [goal]="goal" *ngIf="isPac()"></planner-profile-goal-pac>
     </div>
   </form>
 </div>

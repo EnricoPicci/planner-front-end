@@ -18,6 +18,8 @@ export class ProfileContainerComponent implements OnInit {
   projection$: Observable<any>;
   goalSelected: GoalInterface;
 
+  showCurrentState = true;
+
   constructor(private session: SessionService, private backendHttpService: BackendHttpService) { }
 
   ngOnInit() {
@@ -42,6 +44,10 @@ export class ProfileContainerComponent implements OnInit {
 
   getProfileGoals() {
     return this.profile.goals.sort((a, b) => a.age < b.age ? -1 : 1 );
+  }
+
+  toggleCurrentState() {
+    this.showCurrentState = !this.showCurrentState;
   }
 
 }

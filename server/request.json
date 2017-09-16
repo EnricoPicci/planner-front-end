@@ -1,0 +1,90 @@
+{
+  "id": null,
+  "firstName": "Carlo",
+  "lastName": "Rossi",
+  "age": 31,
+  "goals": [
+    {
+      "name": "Auto",
+      "icon": "motori/motori.png",
+      "type": {
+        "code": "2",
+        "name": "Motori",
+        "icon": "motori/motori.png"
+      },
+      "age": 33,
+      "value": 20000
+    },
+    {
+      "name": "Prima Casa",
+      "icon": "proprieta/immobili.png",
+      "type": {
+        "code": "1",
+        "name": "Immobili",
+        "icon": "proprieta/immobili.png"
+      },
+      "age": 43,
+      "value": 100000
+    },
+    {
+      "name": "Piano Pensione",
+      "icon": "ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png",
+      "type": {
+        "code": "pip",
+        "name": "Piano Pensione",
+        "icon": "ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png"
+      },
+      "age": 60,
+      "value": null,
+      "cashComponent": 0,
+      "debtComponent": 0,
+      "debtDuration": 0,
+      "debtInterest": 0,
+      "investmentComponent": 0,
+      "investmentInterest": 0
+    },
+    {
+      "name": "Piano di Accumulo",
+      "icon": "ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png",
+      "type": {
+        "code": "pac",
+        "name": "Piano di Accumulo",
+        "icon": "ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png"
+      },
+      "age": 74,
+      "value": null,
+      "cashComponent": 0,
+      "debtComponent": 0,
+      "debtDuration": 0,
+      "debtInterest": 0,
+      "investmentComponent": 0,
+      "investmentInterest": 0
+    },
+    {
+      "name": "Protezione",
+      "icon": "ic_security_black_24dp/web/ic_security_black_24dp_1x.png",
+      "type": {
+        "code": "life-ins",
+        "name": "Protezione",
+        "icon": "ic_security_black_24dp/web/ic_security_black_24dp_1x.png"
+      },
+      "age": 86,
+      "value": null,
+      "cashComponent": 0,
+      "debtComponent": 0,
+      "debtDuration": 0,
+      "debtInterest": 0,
+      "investmentComponent": 0,
+      "investmentInterest": 0
+    }
+  ],
+  "initialCapital": 44000,
+  "status": {
+    "code": "2",
+    "name": "Celibe"
+  },
+  "yearlySavings": 1500,
+  "investmentThreashold": 44000,
+  "valueAtRisk": 1740,
+  "planDuration": 29
+}

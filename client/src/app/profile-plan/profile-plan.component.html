@@ -1,7 +1,7 @@
 <!-- <div #chartdiv droppable (onDrop)="onDrop($event)" class="section" *ngIf="projection"
     style="position: absolute; top: 200px; left: 300px; right: 50px; bottom: 60px;"> -->
 <div #chartdiv droppable (onDrop)="onDrop($event)" class="section" *ngIf="projection"
-    style="position: absolute; top: 190px; left: 300px; right: 50px;" fxFlex="100%">
+    style="top: 410px; left: 300px; right: 50px;" fxFlex="100%">
   <ngx-charts-line-chart #chart
     [view]="view"
     [scheme]="colorScheme"
@@ -18,10 +18,15 @@
     (select)="onSelect($event)"
     (activate)="onActivate($event)">
   </ngx-charts-line-chart>
+
+  <div *ngIf="isChartDefined()" style="position: relative; top: -100px;">
+    <planner-profile-goal *ngFor="let goal of profile.goals" [goal]="goal" [xOffset]="getxOffsetForGoal(goal)"></planner-profile-goal>
+  </div>
+
 </div>
 
 
-<div *ngIf="isChartDefined()" style="position: absolute; top: 190px; left: 300px; right: 50px;">
+<!-- <div *ngIf="isChartDefined()" style="position: absolute; top: 410px; left: 300px; right: 50px;">
   <planner-profile-goal *ngFor="let goal of profile.goals" [goal]="goal" [xOffset]="getxOffsetForGoal(goal)"></planner-profile-goal>
-</div>
+</div> -->
 

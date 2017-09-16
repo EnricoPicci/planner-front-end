@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import {GoalInterface} from '../shared/model/goal.interface';
+import {GoalTypeCodes} from '../shared/model/goal-type.interface';
 import {ProfileInterface} from '../shared/model/profile.interface';
 import {SessionService} from '../shared/services/session.service';
 
@@ -65,6 +66,25 @@ export class ProfileGoalDetailsComponent implements OnInit, OnChanges {
   investmentInterestChanged(investmentInterest: number) {
     this.goal.investmentInterest = investmentInterest;
     this.session.goalSelectedChanged(this.goal);
+  }
+
+  isHouse() {
+    return this.goal.type.code === GoalTypeCodes.Immobili;
+  }
+  isPip() {
+    return this.goal.type.code === GoalTypeCodes.Pip;
+  }
+  isPac() {
+    return this.goal.type.code === GoalTypeCodes.Pac;
+  }
+  isLifeInsurance() {
+    return this.goal.type.code === GoalTypeCodes.Protezione;
+  }
+  isGeneric() {
+    return !this.isHouse() && !this.isPip() && !this.isPac() && !this.isLifeInsurance();
+  }
+  showValue() {
+    return !this.isPip() && !this.isPac() && !this.isLifeInsurance();
   }
 
 }
