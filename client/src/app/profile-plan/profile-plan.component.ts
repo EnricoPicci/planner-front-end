@@ -8,6 +8,7 @@ import {GoalTypeInterface} from '../shared/model/goal-type.interface';
 import {GoalInterface} from '../shared/model/goal.interface';
 import {ProfileInterface} from '../shared/model/profile.interface';
 import {SessionService} from '../shared/services/session.service';
+import {SavingsEvolutionService} from '../shared/services/savings-evolution.service';
 
 @Component({
   selector: 'planner-profile-plan',
@@ -16,8 +17,10 @@ import {SessionService} from '../shared/services/session.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePlanComponent implements OnInit {
-  @Input() projection: any;
+  // @Input()
+  projection: any;
   @Input() profile: ProfileInterface;
+  maxAge: number;
 
   @ViewChild('chartdiv') chartdiv;
   // @ViewChild('chart') chart: LineChartComponent;
@@ -40,13 +43,20 @@ export class ProfilePlanComponent implements OnInit {
   };
   autoScale = true;
 
-  constructor(private element: ElementRef, private session: SessionService, private cdr: ChangeDetectorRef) { }
+  constructor(private element: ElementRef,
+              private session: SessionService,
+              private cdr: ChangeDetectorRef,
+              private savingsEvolution: SavingsEvolutionService) { }
 
   ngOnInit() {
-    this.session.selectedGoal$.subscribe(selectedGoal => this.cdr.detectChanges());
+    this.session.selectedGoal$.subscribe(selectedGoal =>
+                                          this.refreshSavingsEvolution());
+    this.session.profile$.subscribe(profile =>
+                                          this.refreshSavingsEvolution());
     const dims = this.element.nativeElement.parentNode.getBoundingClientRect();
-    console.log('dims parent', dims);
     this.view = [dims.width, dims.height];
+    this.maxAge = this.profile.age + this.profile.planDuration;
+    this.refreshSavingsEvolution();
   }
 
   onDrop(event: DropEvent) {
@@ -66,9 +76,8 @@ export class ProfilePlanComponent implements OnInit {
     } else {
       goalPositionX = dropX - chartOffsetX;
     }
-    // tslint:disable-next-line:radix
-    const age = parseInt(this.profile.age);
-    const goalYear = this.round((goalPositionX / chartWidth) * (100 - age)) + age;
+    const age = this.profile.age;
+    const goalYear = this.round((goalPositionX / chartWidth) * (this.maxAge - age)) + age;
 
     let goal: GoalInterface;
     // if a GoalType is dropped, as a result of moving a GoalType into the drop area, then a new Goal is created
@@ -81,7 +90,7 @@ export class ProfilePlanComponent implements OnInit {
         icon: goalType.icon,
         type: goalType,
         age: goalYear,
-        value: null,
+        value: goalType.value,
         cashComponent: 0,
         debtComponent: 0,
         debtDuration: 0,
@@ -95,6 +104,7 @@ export class ProfilePlanComponent implements OnInit {
       goal.age = goalYear;
     }
     this.session.goalSelectedChanged(goal);
+    this.refreshSavingsEvolution();
   }
   // return true if the object passed in as parameter is of type GoalTypeInterface, otherwise false
   private isGoalType(goalOrGoalType) {
@@ -121,9 +131,8 @@ export class ProfilePlanComponent implements OnInit {
     if (this.chart) {
       chartWidth = this.chart.dims.width;
     }
-    // tslint:disable-next-line:radix
-    const age = parseInt(this.profile.age);
-    const ageXOffset = (goal.age - age) / (100 - age) * chartWidth;
+    const age = this.profile.age;
+    const ageXOffset = (goal.age - age) / (this.maxAge - age) * chartWidth;
     return ageXOffset + this.getChartXOffset();
   }
 
@@ -144,6 +153,28 @@ export class ProfilePlanComponent implements OnInit {
 
   private isChartDefined() {
     return this.chart != null;
+  }
+
+  private refreshSavingsEvolution() {
+    const projectionTemp = [];
+    const savings = this.savingsEvolution.calculateSavingsEvolution(this.profile);
+    const savingsChartData = [];
+    const profileAge = this.profile.age;
+    for (let i = 0; i < savings.length; i++) {
+      const year = i + profileAge;
+      const yearlySavings = {
+        'name': year,
+        'value': savings[i]
+      };
+      savingsChartData.push(yearlySavings);
+    }
+    projectionTemp.push({
+      'name': 'Liquidità',
+      'series': savingsChartData
+    });
+    this.projection = projectionTemp;
+    console.log(this.projection);
+    this.cdr.detectChanges();
   }
 
 }

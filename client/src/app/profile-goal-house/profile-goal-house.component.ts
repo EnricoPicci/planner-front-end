@@ -21,5 +21,12 @@ export class ProfileGoalHouseComponent implements OnInit {
   debtDurationChanged(debtDuration: number) {
     this.goal.debtDuration = debtDuration;
   }
+  // mortgageChanged() {
+
+  // }
+
+  // getMortgageValue() {
+  //   return this.goal.debtYearlyRate * this.goal.debtDuration;
+  // }
 
 }

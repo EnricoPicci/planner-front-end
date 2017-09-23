@@ -32,8 +32,7 @@ export class ProfileCurrentStateComponent implements OnInit {
   }
 
   getMaxPlanDuration() {
-    // tslint:disable-next-line:radix
-    return 100 - parseInt(this.profile.age);
+    return 100 - this.profile.age;
   }
 
 }

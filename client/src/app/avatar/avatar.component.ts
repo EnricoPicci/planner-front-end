@@ -46,7 +46,8 @@ export class AvatarComponent implements OnInit {
       goals: this.avatar.goals,
       initialCapital: 0,
       status: this.avatar.status,
-      yearlySavings: 0
+      yearlySavings: this.avatar.yearlySavings,
+      planDuration: this.avatar.planDuration,
     };
     return profile;
   }

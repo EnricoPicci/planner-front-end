@@ -6,7 +6,7 @@
           (valueChanged)="initialCapitalChanged($event)" [value]="profile.initialCapital"></planner-slider>
     </div>
     <div fxFlex="1 1 50%">
-      <planner-slider [title]="'Risparmio annuale'" [min]="0" [max]="3000"
+      <planner-slider [title]="'Risparmio annuale'" [min]="0" [max]="100000"
           (valueChanged)="annualSavingsChanged($event)" [value]="profile.yearlySavings"></planner-slider>
     </div>
   </div>

@@ -8,7 +8,7 @@
         <input mdInput placeholder="Cognome" formControlName="lastName">
       </md-input-container>
       <md-input-container class="form-label">
-        <input mdInput placeholder="Età" formControlName="age">
+        <input mdInput placeholder="Età" formControlName="age" (change)="ageChanged($event)">
       </md-input-container>
       <md-select placeholder="Stato" formControlName="status" *ngIf="statuses">
         <md-option>----</md-option>

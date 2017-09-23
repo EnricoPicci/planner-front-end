@@ -16,7 +16,7 @@
       "value": 20000
     },
     {
-      "name": "Prima Casa",
+      "name": "La mia prima casa",
       "icon": "proprieta/immobili.png",
       "type": {
         "code": "1",
@@ -24,10 +24,12 @@
         "icon": "proprieta/immobili.png"
       },
       "age": 43,
-      "value": 100000
+      "value": "111000",
+      "debtYearlyRate": 36000,
+      "debtDuration": 21
     },
     {
-      "name": "Piano Pensione",
+      "name": "Il mio piano pensione",
       "icon": "ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png",
       "type": {
         "code": "pip",
@@ -41,10 +43,11 @@
       "debtDuration": 0,
       "debtInterest": 0,
       "investmentComponent": 0,
-      "investmentInterest": 0
+      "investmentInterest": 0,
+      "debtYearlyRate": 58
     },
     {
-      "name": "Piano di Accumulo",
+      "name": "Il mio Pac",
       "icon": "ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png",
       "type": {
         "code": "pac",
@@ -58,10 +61,12 @@
       "debtDuration": 0,
       "debtInterest": 0,
       "investmentComponent": 0,
-      "investmentInterest": 0
+      "investmentInterest": 0,
+      "debtYearlyRate": 44,
+      "investmentDuration": 37
     },
     {
-      "name": "Protezione",
+      "name": "La mia assicurazione",
       "icon": "ic_security_black_24dp/web/ic_security_black_24dp_1x.png",
       "type": {
         "code": "life-ins",
@@ -75,7 +80,8 @@
       "debtDuration": 0,
       "debtInterest": 0,
       "investmentComponent": 0,
-      "investmentInterest": 0
+      "investmentInterest": 0,
+      "futureIncomeCoveragePercentage": 56
     }
   ],
   "initialCapital": 44000,

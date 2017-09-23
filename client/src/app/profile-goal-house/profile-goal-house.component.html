@@ -1,4 +1,10 @@
 <div class="row2" fxLayout="row" fxFlex="1 1 100%" fxLayoutAlign="space-around center">  
+  <!-- <div fxFlex>
+    <planner-slider [title]="'Valore mutuo'" [min]="0" [max]="goal.value" 
+                    [value]="getMortgageValue()"
+                    (valueChanged)="mortgageChanged($event)">
+    </planner-slider>
+  </div> -->
   <div fxFlex>
     <planner-slider [title]="'Rata mutuo'" [min]="0" [max]="goal.value" 
                     [value]="goal.debtYearlyRate"
@@ -6,7 +12,7 @@
     </planner-slider>
   </div>
   <div fxFlex>
-    <planner-slider [title]="'Anni Finanziamento'" [min]="0" [max]="50" 
+    <planner-slider [title]="'Anni Finanziamento'" [min]="0" [max]="30" 
                     [value]="goal.debtDuration"
                     (valueChanged)="debtDurationChanged($event)">
     </planner-slider>

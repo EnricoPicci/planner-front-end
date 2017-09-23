@@ -30,6 +30,7 @@ export class ProfileGoalDetailsComponent implements OnInit, OnChanges {
     this.goalForm.valueChanges.subscribe(formValues => {
       this.goal.value = this.goalForm.value.value;
       this.goal.name = this.goalForm.value.name;
+      this.session.goalSelectedChanged(this.goal);
     });
   }
   createForm(goal: GoalInterface) {
@@ -43,30 +44,30 @@ export class ProfileGoalDetailsComponent implements OnInit, OnChanges {
     this.goal.age = age;
     this.session.goalSelectedChanged(this.goal);
   }
-  cashComponentChanged(cashComponent: number) {
-    this.goal.cashComponent = cashComponent;
-    this.session.goalSelectedChanged(this.goal);
-  }
-  debtComponentChanged(debtComponent: number) {
-    this.goal.debtComponent = debtComponent;
-    this.session.goalSelectedChanged(this.goal);
-  }
-  debtInterestChanged(debtInterest: number) {
-    this.goal.debtInterest = debtInterest;
-    this.session.goalSelectedChanged(this.goal);
-  }
-  debtDurationChanged(debtDuration: number) {
-    this.goal.debtDuration = debtDuration;
-    this.session.goalSelectedChanged(this.goal);
-  }
-  investmentComponentChanged(investmentComponent: number) {
-    this.goal.investmentComponent = investmentComponent;
-    this.session.goalSelectedChanged(this.goal);
-  }
-  investmentInterestChanged(investmentInterest: number) {
-    this.goal.investmentInterest = investmentInterest;
-    this.session.goalSelectedChanged(this.goal);
-  }
+  // cashComponentChanged(cashComponent: number) {
+  //   this.goal.cashComponent = cashComponent;
+  //   this.session.goalSelectedChanged(this.goal);
+  // }
+  // debtComponentChanged(debtComponent: number) {
+  //   this.goal.debtComponent = debtComponent;
+  //   this.session.goalSelectedChanged(this.goal);
+  // }
+  // debtInterestChanged(debtInterest: number) {
+  //   this.goal.debtInterest = debtInterest;
+  //   this.session.goalSelectedChanged(this.goal);
+  // }
+  // debtDurationChanged(debtDuration: number) {
+  //   this.goal.debtDuration = debtDuration;
+  //   this.session.goalSelectedChanged(this.goal);
+  // }
+  // investmentComponentChanged(investmentComponent: number) {
+  //   this.goal.investmentComponent = investmentComponent;
+  //   this.session.goalSelectedChanged(this.goal);
+  // }
+  // investmentInterestChanged(investmentInterest: number) {
+  //   this.goal.investmentInterest = investmentInterest;
+  //   this.session.goalSelectedChanged(this.goal);
+  // }
 
   isHouse() {
     return this.goal.type.code === GoalTypeCodes.Immobili;
@@ -85,6 +86,10 @@ export class ProfileGoalDetailsComponent implements OnInit, OnChanges {
   }
   showValue() {
     return !this.isPip() && !this.isPac() && !this.isLifeInsurance();
+  }
+
+  getMaxAge() {
+    return this.profile.age + this.profile.planDuration;
   }
 
 }

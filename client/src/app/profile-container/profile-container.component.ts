@@ -15,26 +15,28 @@ import {GoalInterface} from '../shared/model/goal.interface';
 export class ProfileContainerComponent implements OnInit {
   profile: ProfileInterface;
   goalTypes$: Observable<GoalTypeInterface>;
-  projection$: Observable<any>;
+  // projection$: Observable<any>;
   goalSelected: GoalInterface;
 
   showCurrentState = true;
 
-  constructor(private session: SessionService, private backendHttpService: BackendHttpService) { }
+  constructor(private session: SessionService,
+                private backendHttpService: BackendHttpService
+              ) { }
 
   ngOnInit() {
     this.profile = this.session.profile;
     this.goalTypes$ = this.backendHttpService.getGoalTypeList();
-    this.getProjection();
+    // this.getProjection();
 
     this.session.selectedGoal$.subscribe(goalSelected => {
       this.goalSelected = goalSelected;
     });
   }
 
-  getProjection() {
-    this.projection$ = this.backendHttpService.getProjection(this.profile);
-  }
+  // getProjection() {
+  //   this.projection$ = this.backendHttpService.getProjection(this.profile);
+  // }
 
   delete(goal: GoalInterface) {
     const index = this.profile.goals.indexOf(goal);

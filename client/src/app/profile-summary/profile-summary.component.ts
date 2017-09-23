@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import { BackendHttpService } from '../shared/services/backend-http.service';
 import {StatusInterface} from '../shared/model/status.interface';
 import {ProfileInterface} from '../shared/model/profile.interface';
+import {SessionService} from '../shared/services/session.service';
 
 @Component({
   selector: 'planner-profile-summary',
@@ -19,7 +20,8 @@ export class ProfileSummaryComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private backendHttpService: BackendHttpService
+    private backendHttpService: BackendHttpService,
+    private session: SessionService
   ) {}
 
   ngOnInit() {
@@ -33,12 +35,14 @@ export class ProfileSummaryComponent implements OnInit {
     this.profileForm = this.fb.group({
       firstName: profile.firstName,
       lastName: profile.lastName,
-      age: [profile.age, Validators.required],
+      age: [profile.age, [Validators.required]],
       status: status.code
     });
     this.profileForm.valueChanges.subscribe(formValues => {
       this.profile.firstName = formValues.firstName;
       this.profile.lastName = formValues.lastName;
+      // this.profile.age = formValues.age;
+      this.profile.status = formValues.status;
     });
   }
 
@@ -52,6 +56,19 @@ export class ProfileSummaryComponent implements OnInit {
                               this.profile.id = profileId;
                               console.log('profile saved with id', profileId);
                             });
+  }
+
+  ageChanged(event) {
+    console.log('age changed', event.target.value);
+    // tslint:disable-next-line:radix
+    this.profile.age = parseInt(event.target.value);
+    this.session.profileChanged();
+  }
+
+  getFirstGoalAge() {
+    const minGoalAge = this.profile.goals.sort((a, b) => a.age - b.age)[0].age;
+    console.log('min goal age', minGoalAge);
+    return this.profile.goals.sort((a, b) => a.age - b.age)[0].age;
   }
 
 }

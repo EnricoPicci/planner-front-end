@@ -112,7 +112,7 @@ describe('BackendHttpService', () => {
                       .switchMap(profileId => backendHttpService.getAllProfiles()
                                               .map(allProfiles => [allProfiles, profileId] ))
                       .subscribe(results => {
-                        console.log(results);
+                        // console.log(results);
                         const allProfiles = results[0];
                         const profileId = results[1];
                         expect(allProfiles[profileId].firstName).toBe(profile.firstName);
@@ -122,7 +122,7 @@ describe('BackendHttpService', () => {
 
   it('should read the list of goaltypes', done => {
     backendHttpService.getGoalTypeList().subscribe(results => {
-      expect(results.length).toBe(5);
+      expect(results.length).toBe(8);
       done();
     });
   });
@@ -136,7 +136,7 @@ describe('BackendHttpService', () => {
   it('should obtain the projection for a profile', done => {
     const profile = getProfile();
     // tslint:disable-next-line:radix
-    const years = 100 - parseInt(profile.age);
+    const years = 100 - profile.age;
     backendHttpService.getProjection(profile).subscribe(results => {
       expect(results.length).toBe(3);
       expect(results[0].series.length).toBe(years);
@@ -151,7 +151,7 @@ function getProfile() {
     id: null,
     firstName: 'Enrico',
     lastName: 'Typescript',
-    age: '24',
+    age: 24,
     status: null,
     initialCapital: 1000,
     yearlySavings: 10,

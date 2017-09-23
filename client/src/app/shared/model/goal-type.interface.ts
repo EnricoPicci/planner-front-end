@@ -2,6 +2,7 @@ export interface GoalTypeInterface {
     code: string;
     name: string;
     icon: string;
+    value: number;
 }
 
 // GoalTypeCodes stores the values of the 'code' property of each goal type as a dictionary

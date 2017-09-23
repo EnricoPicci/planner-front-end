@@ -11,7 +11,7 @@ import {SessionService} from '../shared/services/session.service';
   selector: 'planner-profile-goal',
   template: `
     <div *ngIf="xOffset" (click)="onClick()" draggable [dragData]="goal" [dragImage] = "getIcon()">
-      <img [src]="getIcon()" style="position: absolute; top: -10px" [style.left]="getXOffset()" [class.selectedImg]="selected"
+      <img [src]="getIcon()" style="position: absolute; top: 40px" [style.left]="getXOffset()" [class.selectedImg]="selected"
           mdTooltip="{{getTooltip()}}" [mdTooltipPosition]="'above'">
     </div>
     <div *ngIf="!xOffset" class="tab" [class.selected]="selected" (click)="onClick()">

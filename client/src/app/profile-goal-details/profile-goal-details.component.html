@@ -13,7 +13,7 @@
           </md-input-container>
         </div>
         <div fxFlex="1 1 30%">
-          <planner-slider [title]="'Età'" [min]="profile.age" [max]="100" 
+          <planner-slider [title]="'Età'" [min]="profile.age" [max]="getMaxAge()" 
                           [step]="1" [value]="goal.age"
                           (valueChanged)="ageChanged($event)">
           </planner-slider>

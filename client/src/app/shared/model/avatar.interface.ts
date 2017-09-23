@@ -7,4 +7,6 @@ export interface AvatarInterface {
     status: StatusInterface;
     image: string;
     goals: Array<GoalInterface>;
+    planDuration: number;
+    yearlySavings: number;
 }

@@ -36,6 +36,7 @@ import { ProfileGoalHouseComponent } from './profile-goal-house/profile-goal-hou
 import { ProfileGoalPacComponent } from './profile-goal-pac/profile-goal-pac.component';
 import { ProfileGoalLifeInsComponent } from './profile-goal-life-ins/profile-goal-life-ins.component';
 import { ProfileGoalPipComponent } from './profile-goal-pip/profile-goal-pip.component';
+import {SavingsEvolutionService} from './shared/services/savings-evolution.service';
 
 const appRoutes: Routes = [
   {
@@ -109,7 +110,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     BackendHttpService,
-    SessionService
+    SessionService,
+    SavingsEvolutionService
   ],
   bootstrap: [AppComponent]
 })

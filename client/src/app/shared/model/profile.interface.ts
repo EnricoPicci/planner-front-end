@@ -5,7 +5,7 @@ export interface ProfileInterface {
     id?: string;
     firstName?: string;
     lastName?: string;
-    age?: string;
+    age?: number;
     status?: StatusInterface;
     initialCapital?: number;
     yearlySavings?: number;
