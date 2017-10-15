@@ -42,7 +42,8 @@ export class AvatarComponent implements OnInit {
       id: null,
       firstName: null,
       lastName: null,
-      age: this.avatar.age,
+      // tslint:disable-next-line:radix
+      age: parseInt(this.avatar.age),
       goals: this.avatar.goals,
       initialCapital: 0,
       status: this.avatar.status,

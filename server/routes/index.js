@@ -158,7 +158,7 @@ router.put('/saveprofile', function(req, res, next) {
     nextProfileID++;
   }
   storedProfiles[profile.id] = profile;
-  console.log('stored profiles', storedProfiles);
+  console.log('profile saved', JSON.stringify(profile, undefined, 2));
   var data = {};
   data.results = profile.id;
   res.send(data);
