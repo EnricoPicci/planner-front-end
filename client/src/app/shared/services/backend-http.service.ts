@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import {environment} from '../../../environments/environment';
@@ -10,6 +12,8 @@ import {StatusInterface} from '../model/status.interface';
 import {ProfileInterface} from '../model/profile.interface';
 import {GoalTypeInterface} from '../model/goal-type.interface';
 import {AvatarSelectionParamsInterface} from '../model/avatar-selection-params.interface';
+
+import {response} from './backend-grafici-response-data';
 
 @Injectable()
 export class BackendHttpService {
@@ -73,4 +77,9 @@ export class BackendHttpService {
                       .map(data => data['results']);
   }
 
+  getProjectionsData(profile: ProfileInterface) {
+    return Observable.of(response);
+  }
+
 }
+

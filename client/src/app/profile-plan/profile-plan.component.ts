@@ -173,7 +173,7 @@ export class ProfilePlanComponent implements OnInit {
       'series': savingsChartData
     });
     this.projection = projectionTemp;
-    console.log(this.projection);
+    console.log('projectionTemp', this.projection);
     this.cdr.detectChanges();
   }
 

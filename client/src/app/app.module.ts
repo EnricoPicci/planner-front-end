@@ -37,8 +37,14 @@ import { ProfileGoalPacComponent } from './profile-goal-pac/profile-goal-pac.com
 import { ProfileGoalLifeInsComponent } from './profile-goal-life-ins/profile-goal-life-ins.component';
 import { ProfileGoalPipComponent } from './profile-goal-pip/profile-goal-pip.component';
 import {SavingsEvolutionService} from './shared/services/savings-evolution.service';
+import { ProfileISSEComponent } from './profile-isse/profile-isse.component';
 
 const appRoutes: Routes = [
+  {
+    path: 'isse',
+    component: ProfileISSEComponent,
+    data: { title: 'Isse' }
+  },
   {
     path: 'avatars',
     component: AvatarListContainerComponent,
@@ -81,7 +87,8 @@ const appRoutes: Routes = [
     ProfileGoalHouseComponent,
     ProfileGoalPacComponent,
     ProfileGoalLifeInsComponent,
-    ProfileGoalPipComponent
+    ProfileGoalPipComponent,
+    ProfileISSEComponent
   ],
   imports: [
     BrowserModule,

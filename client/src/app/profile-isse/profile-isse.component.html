@@ -1,0 +1,54 @@
+<!-- <div #chartdiv class="section" *ngIf="isseGraphData"
+    style="top: 410px; left: 300px; right: 50px;" fxFlex="100%"> -->
+<div>
+  <!-- <ngx-charts-bar-horizontal #chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="isseGraphData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)">
+  </ngx-charts-bar-horizontal> -->
+
+<!-- 
+  <ngx-charts-bar-horizontal
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="isseGraphData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel">
+    (select)="onSelect($event)">
+  </ngx-charts-bar-horizontal> -->
+
+  <ngx-charts-bar-horizontal-2d
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="isseGraphData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)">
+  </ngx-charts-bar-horizontal-2d>
+
+
+<!-- dddddd -->
+
+</div>

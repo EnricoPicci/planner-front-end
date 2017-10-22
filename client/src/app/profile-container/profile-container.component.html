@@ -5,6 +5,7 @@
           <planner-profile-summary [profile]="profile"></planner-profile-summary>
         </div>
 
+        <!-- ************ Area Current Situation ************ -->
         <div class="container" fxFlex [style.min-height]="showCurrentState ? '240px': '40px'">
           <div class="section" fxLayout="column" fxFlex>
             <div fxFlex="35px" class="section-header">
@@ -15,7 +16,8 @@
               </h4>
               <i class="fa fa-angle-down" 
                   [class.fa-angle-down]="showCurrentState" [class.fa-angle-up]="!showCurrentState"
-                  (click)="toggleCurrentState()" style="cursor: pointer"></i>
+                  (click)="toggleCurrentState()" style="cursor: pointer">
+              </i>
             </div>
             <div fxFlex *ngIf="showCurrentState">
               <planner-profile-current-state [profile]="profile"></planner-profile-current-state>
@@ -23,6 +25,7 @@
           </div>
         </div>
 
+         <!-- ************ Area Life Objectives ************ -->
         <div class="container container1" fxLayout="row" fxFlex>
           <div class="section left-bar" fxLayout="column" fxFlex="245px">     
             <div class="section-header" fxFlex="35px">
@@ -51,24 +54,56 @@
           </div>
         </div>
 
-        <div class="container container3" fxFlex>
+         <!-- ************ Area Objectives Details ************ -->
+        <div class="container container3" fxFlex [style.min-height]="showObjectives ? '380px': '40px'">
           <div class="section" fxLayout="column" fxFlex>
             <div fxFlex="35px" class="section-header">
-              <h4 class="font section-title">Obiettivi</h4>
+              <h4 class="font section-title">Dettaglio Obiettivi</h4>
+              <span fxFlex></span>
+              <h4 class="section-title section-tools">
+                {{showObjectives ? 'Chiudi': 'Apri'}}
+              </h4>
+              <i class="fa fa-angle-down" 
+                  [class.fa-angle-down]="showObjectives" [class.fa-angle-up]="!showObjectives"
+                  (click)="toggleObjectives()" style="cursor: pointer">
+              </i>
             </div>
-            <div fxFlex="1 1 8%" class="goal-bar" fxLayout="row" fxLayoutAlign="space-around center">
+            <div fxFlex="1 1 8%" class="goal-bar" fxLayout="row" fxLayoutAlign="space-around center"
+                  *ngIf="showObjectives">
                 <planner-profile-goal fxFlex *ngFor="let goal of getProfileGoals()" 
                     [goal]="goal" (close)="delete(goal)">
                 </planner-profile-goal>
             </div>
-            <div fxFlex="1 1 92%" *ngIf="goalSelected">
+            <div fxFlex="1 1 92%" *ngIf="goalSelected && showObjectives">
               <planner-profile-goal-details [goal]="goalSelected" [profile]="profile"></planner-profile-goal-details>
+            </div>
+          </div>
+        </div>
+
+        <!-- ************ ISSE                     ************ -->
+        <div class="container container3" fxFlex [style.min-height]="showIsse ? '1040px': '40px'">
+          <div class="section" fxLayout="column" fxFlex>
+            <div fxFlex="35px" class="section-header">
+              <h4 class="font section-title">ISSE</h4>
+              <span fxFlex></span>
+              <h4 class="section-title section-tools">
+                {{showIsse ? 'Chiudi': 'Apri'}}
+              </h4>
+              <i class="fa fa-angle-down" 
+                  [class.fa-angle-down]="showIsse" [class.fa-angle-up]="!showIsse"
+                  (click)="toggleIsse()" style="cursor: pointer">
+              </i>
+            </div>
+            <div fxFlex="1 1 92%" *ngIf="showIsse">
+              <planner-profile-isse [isseData]="isseData"></planner-profile-isse>
             </div>
           </div>
         </div>
   
       </div>
     </md-card-content>
+
+
     <md-card-footer class="font footer">
       FFO
     </md-card-footer>

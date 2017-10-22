@@ -14,7 +14,7 @@ import {ProfileInterface} from '../shared/model/profile.interface';
 export class AvatarComponent implements OnInit {
   @Input() avatar: AvatarInterface;
 
-  private over = false;
+  over = false;
 
   @HostListener('mouseenter')
   onMouseEnter() {
