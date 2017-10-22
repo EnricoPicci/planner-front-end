@@ -1,0 +1,30 @@
+<div *ngIf="dataForFinancialPlanGraph"  fxLayout="column">
+
+  <ngx-charts-line-chart  fxFlex
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="dataForFinancialPlanGraph"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [autoScale]="autoScale"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)">
+  </ngx-charts-line-chart>
+
+  <div fxLayout="row" style="padding-left: 20px;">
+    <h4 style="padding-right: 20px;">Scelta</h4>
+    <md-radio-group class="radio-group" [(ngModel)]="favoriteScelta" (change)="setScelta($event)">
+        <md-radio-button class="radio-button" *ngFor="let scelta of scelte" [value]="scelta"  fxFlex>
+          {{scelta}}
+        </md-radio-button>
+      </md-radio-group>
+  </div>
+    
+
+</div>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -7,7 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {MdSidenavModule, MdToolbarModule, MdIconModule, MdCardModule,
         MdSelectModule, MdSliderModule, MdGridListModule, MdButtonModule,
-        MdCheckboxModule, MdInputModule, MdTooltipModule, MdDialogModule} from '@angular/material';
+        MdCheckboxModule, MdInputModule, MdTooltipModule, MdDialogModule,
+        MdRadioModule} from '@angular/material';
 import 'hammerjs';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -38,6 +40,7 @@ import { ProfileGoalLifeInsComponent } from './profile-goal-life-ins/profile-goa
 import { ProfileGoalPipComponent } from './profile-goal-pip/profile-goal-pip.component';
 import {SavingsEvolutionService} from './shared/services/savings-evolution.service';
 import { ProfileISSEComponent } from './profile-isse/profile-isse.component';
+import { ProfileFinancialPlanComponent } from './profile-financial-plan/profile-financial-plan.component';
 
 const appRoutes: Routes = [
   {
@@ -88,11 +91,13 @@ const appRoutes: Routes = [
     ProfileGoalPacComponent,
     ProfileGoalLifeInsComponent,
     ProfileGoalPipComponent,
-    ProfileISSEComponent
+    ProfileISSEComponent,
+    ProfileFinancialPlanComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -111,6 +116,7 @@ const appRoutes: Routes = [
     MdCheckboxModule,
     MdTooltipModule,
     MdDialogModule,
+    MdRadioModule,
     FlexLayoutModule,
     Ng2DragDropModule.forRoot(),
     NgxChartsModule

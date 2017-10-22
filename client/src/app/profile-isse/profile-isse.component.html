@@ -1,39 +1,7 @@
-<!-- <div #chartdiv class="section" *ngIf="isseGraphData"
-    style="top: 410px; left: 300px; right: 50px;" fxFlex="100%"> -->
-<div>
-  <!-- <ngx-charts-bar-horizontal #chart
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="isseGraphData"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    (select)="onSelect($event)"
-    (activate)="onActivate($event)">
-  </ngx-charts-bar-horizontal> -->
 
-<!-- 
-  <ngx-charts-bar-horizontal
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="isseGraphData"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel">
-    (select)="onSelect($event)">
-  </ngx-charts-bar-horizontal> -->
+<div *ngIf="_dataForAllYears" fxLayout="column">
 
-  <ngx-charts-bar-horizontal-2d
+  <ngx-charts-bar-horizontal-2d fxFlex
     [view]="view"
     [scheme]="colorScheme"
     [results]="isseGraphData"
@@ -48,7 +16,17 @@
     (select)="onSelect($event)">
   </ngx-charts-bar-horizontal-2d>
 
-
-<!-- dddddd -->
+  <div fxLayout="row" style="padding-left: 20px;">
+    <h4 style="padding-right: 20px; margin-top: 15px;">Anno</h4>
+    <md-slider  style="width: 60%"
+        [max]="getMaxAnno()"
+        [min]="2"
+        [step]="1"
+        [thumb-label]="true"
+        [tick-interval]="1"
+        [value]="year"
+        (change) = "setYear($event)">
+    </md-slider>
+  </div>
 
 </div>

@@ -20,10 +20,14 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
   goalSelectedSub: Subscription;
 
   isseData;
+  financialPlanData;
 
   showCurrentState = true;
   showObjectives = true;
+  buildIsse = false;
+  buildFinancialPlan = false;
   showIsse = false;
+  showFinancialPlan = false;
 
   constructor(private session: SessionService,
                 private backendHttpService: BackendHttpService,
@@ -45,16 +49,14 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
 
   getProjection() {
     // this.router.navigate(['isse']);
+    this.prepareAllSectionsClosed();
     this.backendHttpService.getProjectionsData(this.profile)
                             .map(projectionsData => projectionsData['graphs'])
-                            .map(graphsData => graphsData.find(data => data['id'] === 'grafico_02')['values'])
                             .subscribe(graphsData => {
-                              this.isseData = graphsData;
-                                                // .find(s => s.year === 2).data
-                                                // // tslint:disable-next-line:arrow-return-shorthand
-                                                // .map(d => {return {name: d.assex, value: d.invest}; });
-                              console.log('isse data', this.isseData);
-                              this.showIsse = true;
+                              this.isseData = graphsData.find(data => data['id'] === 'grafico_02')['values'];
+                              this.financialPlanData = graphsData.find(data => data['id'] === 'grafico_04')['scelte'];
+                              // this.showIsse = true;
+                              // this.showFinancialPlan = true;
                             });
   }
 
@@ -76,6 +78,18 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
   }
   toggleIsse() {
     this.showIsse = !this.showIsse;
+  }
+  toggleFinancialPlan() {
+    this.showFinancialPlan = !this.showFinancialPlan;
+  }
+
+  prepareAllSectionsClosed() {
+    this.buildFinancialPlan = true;
+    this.buildIsse = true;
+    this.showCurrentState = false;
+    this.showFinancialPlan = false;
+    this.showIsse = false;
+    this.showObjectives = false;
   }
 
 }

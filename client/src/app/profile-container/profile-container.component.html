@@ -81,7 +81,7 @@
         </div>
 
         <!-- ************ ISSE                     ************ -->
-        <div class="container container3" fxFlex [style.min-height]="showIsse ? '1040px': '40px'">
+        <div class="container container3" fxFlex [style.min-height]="showIsse ? '900px': '40px'" *ngIf="buildIsse">
           <div class="section" fxLayout="column" fxFlex>
             <div fxFlex="35px" class="section-header">
               <h4 class="font section-title">ISSE</h4>
@@ -99,12 +99,30 @@
             </div>
           </div>
         </div>
+
+
+
+        <!-- ************ PIANO FINANZIARIO               ************ -->
+        <div class="container container3" fxFlex [style.min-height]="showFinancialPlan ? '500px': '40px'" *ngIf="buildFinancialPlan">
+          <div class="section" fxLayout="column" fxFlex>
+            <div fxFlex="35px" class="section-header">
+              <h4 class="font section-title">PIANO FINANZIARIO</h4>
+              <span fxFlex></span>
+              <h4 class="section-title section-tools">
+                {{showFinancialPlan ? 'Chiudi': 'Apri'}}
+              </h4>
+              <i class="fa fa-angle-down" 
+                  [class.fa-angle-down]="showFinancialPlan" [class.fa-angle-up]="!showFinancialPlan"
+                  (click)="toggleFinancialPlan()" style="cursor: pointer">
+              </i>
+            </div>
+            <div fxFlex="1 1 92%" *ngIf="showFinancialPlan">
+              <planner-profile-financial-plan [financialPlanData]="financialPlanData"></planner-profile-financial-plan>
+            </div>
+          </div>
+        </div>
   
       </div>
     </md-card-content>
 
-
-    <md-card-footer class="font footer">
-      FFO
-    </md-card-footer>
   </md-card>
