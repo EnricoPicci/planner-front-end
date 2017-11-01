@@ -14,6 +14,9 @@ router.use(function (req, res, next) {
   next();
 });
 
+/* get projection data  */
+var projectionData = require ('./backend-grafici-response-data');
+var projectionDataResponse = projectionData.projectionResponse;
 
 /* set statuses */
 var statuses = [
@@ -104,7 +107,7 @@ var avatars = [
           {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]}
 ];
 
-/* crete hash to store profiles and a variable to store next profile ID */
+/* crete dictionary to store profiles and a variable to store next profile ID */
 var storedProfiles = {};
 var nextProfileID = 0;
 
@@ -196,51 +199,8 @@ router.get('/goaltypelist', function(req, res, next) {
 router.post('/projection', function(req, res, next) {
   var profile = req.body;
   console.log('profile for projection', JSON.stringify(profile, undefined, 2));
-  var profileAge = parseInt(profile.age);
-  var years = 100 - profileAge;
-  var incoming = [];
-  var outgoing = [];
-  var saving = [];
-
-  var randomNumber = getRandomArbitrary(20, 40);
-  
-  for (var i = 0; i < years; i++) {
-    year = i + profileAge;
-    var yearlyIncoming = {
-      'name': year,
-      'value': Math.sin(i/randomNumber)*50
-    };
-    incoming.push(yearlyIncoming);
-    var yearlyOutgoing = {
-      'name': year,
-      'value': Math.cos(i/(randomNumber*1.5))*20
-    };
-    outgoing.push(yearlyOutgoing);
-    var yearlySaving = {
-      'name': year,
-      'value': Math.tan(i/(randomNumber*3))*50
-    };
-    saving.push(yearlySaving);
-  }
-  var projection = [
-    {
-      "name": "Entrate",
-      "series": incoming
-    },
-  
-    {
-      "name": "Uscite",
-      "series": outgoing
-    },
-  
-    {
-      "name": "Risparmi",
-      "series": saving
-    }
-  ];
   var data = {};
-  data.results = projection;
-  // console.log('Risultati pianificazione', JSON.stringify(data.results));
+  data.results = projectionDataResponse;
   res.send(data);
 });
 

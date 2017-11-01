@@ -50,7 +50,7 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
   getProjection() {
     // this.router.navigate(['isse']);
     this.prepareAllSectionsClosed();
-    this.backendHttpService.getProjectionsData(this.profile)
+    this.backendHttpService.getProjection(this.profile)
                             .map(projectionsData => projectionsData['graphs'])
                             .subscribe(graphsData => {
                               this.isseData = graphsData.find(data => data['id'] === 'grafico_02')['values'];

@@ -54,12 +54,10 @@ export class ProfileSummaryComponent implements OnInit {
     this.backendHttpService.saveProfile(this.profile)
                             .subscribe(profileId => {
                               this.profile.id = profileId;
-                              console.log('profile saved with id', profileId);
                             });
   }
 
   ageChanged(event) {
-    console.log('age changed', event.target.value);
     // tslint:disable-next-line:radix
     this.profile.age = parseInt(event.target.value);
     this.session.profileChanged();
@@ -67,7 +65,6 @@ export class ProfileSummaryComponent implements OnInit {
 
   getFirstGoalAge() {
     const minGoalAge = this.profile.goals.sort((a, b) => a.age - b.age)[0].age;
-    console.log('min goal age', minGoalAge);
     return this.profile.goals.sort((a, b) => a.age - b.age)[0].age;
   }
 

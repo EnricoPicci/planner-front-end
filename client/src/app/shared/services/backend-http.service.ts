@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import { RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -72,9 +73,22 @@ export class BackendHttpService {
   }
 
   getProjection(profile: ProfileInterface) {
-    const url = this.apiurl + 'projection';
-    return this.http.post(url, profile)
-                      .map(data => data['results']);
+    // const url = this.apiurl + 'projection';
+    for (const goal of profile.goals) {
+      goal.type = {... goal.type};
+      delete goal.type.value;
+    }
+    if (!profile.valueAtRisk) {
+      profile.valueAtRisk = 500;
+    }
+    if (!profile.investmentThreashold) {
+      profile.investmentThreashold = 5000;
+    }
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    headers.append('Accept', 'application/json');
+    // const options = new RequestOptions({headers: headers});
+    const url = 'http://www.breakindatacompany.com/RobotWS/robotws/roboservice';
+    return this.http.post(url, profile, {headers: headers});
   }
 
   getProjectionsData(profile: ProfileInterface) {

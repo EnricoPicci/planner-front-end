@@ -44,7 +44,6 @@ export class ProfileFinancialPlanComponent implements OnInit {
 
   setFinancialPlanDataForScelta() {
     const dataForScelta = this._dataForAllScelte.find(data => data.scelta === this.favoriteScelta).data;
-    console.log('dataForScelta', dataForScelta);
     this.dataForFinancialPlanGraph = [];
     const dataForFinancialPlanGraphBest = {
       name: 'Scenario migliore',

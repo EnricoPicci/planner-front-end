@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Subscription} from 'rxjs/Rx';
 
 import {GoalInterface} from '../shared/model/goal.interface';
 import {GoalTypeCodes} from '../shared/model/goal-type.interface';
@@ -11,27 +12,30 @@ import {SessionService} from '../shared/services/session.service';
   templateUrl: './profile-goal-details.component.html',
   styleUrls: ['./profile-goal-details.component.css']
 })
-export class ProfileGoalDetailsComponent implements OnInit, OnChanges {
+export class ProfileGoalDetailsComponent implements OnInit, OnDestroy, OnChanges {
   @Input() goal: GoalInterface;
   @Input() profile: ProfileInterface;
 
   goalForm: FormGroup;
+  goalFormSubscription: Subscription;
 
   constructor(private fb: FormBuilder, private session: SessionService) { }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    console.log('SimpleChanges', simpleChanges);
     if (this.goalForm) {
       this.goalForm.patchValue(simpleChanges.goal.currentValue);
     }
   }
   ngOnInit() {
     this.createForm(this.goal);
-    this.goalForm.valueChanges.subscribe(formValues => {
+    this.goalFormSubscription = this.goalForm.valueChanges.subscribe(formValues => {
       this.goal.value = this.goalForm.value.value;
       this.goal.name = this.goalForm.value.name;
       this.session.goalSelectedChanged(this.goal);
     });
+  }
+  ngOnDestroy() {
+    this.goalFormSubscription.unsubscribe();
   }
   createForm(goal: GoalInterface) {
     this.goalForm = this.fb.group({

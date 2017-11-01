@@ -1,0 +1,39 @@
+{
+  "id": null,
+  "firstName": null,
+  "lastName": null,
+  "age": 31,
+  "goals": [
+    {
+      "name": "Auto",
+      "icon": "motori/motori.png",
+      "type": {
+        "code": "2",
+        "name": "Motori",
+        "icon": "motori/motori.png",
+        "value": 20000
+      },
+      "age": 35,
+      "value": 20000
+    },
+    {
+      "name": "Prima Casa",
+      "icon": "proprieta/immobili.png",
+      "type": {
+        "code": "1",
+        "name": "Immobili",
+        "icon": "proprieta/immobili.png",
+        "value": 200000
+      },
+      "age": 40,
+      "value": 100000
+    }
+  ],
+  "initialCapital": 0,
+  "status": {
+    "code": "2",
+    "name": "Celibe"
+  },
+  "yearlySavings": 10000,
+  "planDuration": 30
+}

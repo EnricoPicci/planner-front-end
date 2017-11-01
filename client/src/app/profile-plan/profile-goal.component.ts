@@ -60,13 +60,18 @@ export class ProfileGoalComponent implements OnInit, OnDestroy {
 
   selected = false;
   selectedGoalSubscription: Subscription;
+  profileSubscription: Subscription;
 
   constructor(private session: SessionService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.selectedGoalSubscription = this.session.selectedGoal$.subscribe(goalSelected => {
       this.selected = (this.goal === goalSelected);
-      console.log('selected', this.selected);
+      // used to make sure that when the selected goal is changed we refresh the view of this component and update
+      // classes that are used to show the 'selected' state
+      this.changeDetectorRef.detectChanges();
+    });
+    this.profileSubscription = this.session.profile$.subscribe(profile => {
       // used to make sure that when the selected goal is changed we refresh the view of this component and update
       // classes that are used to show the 'selected' state
       this.changeDetectorRef.detectChanges();
@@ -74,6 +79,7 @@ export class ProfileGoalComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.selectedGoalSubscription.unsubscribe();
+    this.profileSubscription.unsubscribe();
   }
 
   getIcon() {
@@ -81,7 +87,6 @@ export class ProfileGoalComponent implements OnInit, OnDestroy {
   }
 
   private getXOffset() {
-    console.log('this.xOffset', this.xOffset + 'px');
     return this.xOffset + 'px';
   }
 

@@ -21,7 +21,6 @@ export class ProfileListContainerComponent implements OnInit {
     this.profileList$ = this.backendHttpService.getAllProfiles();
     this.profileList$.subscribe(results => {
       this.profileList = results;
-      console.log('all profiles', this.profileList);
     });
   }
 

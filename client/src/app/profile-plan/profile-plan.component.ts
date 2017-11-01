@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ElementRef, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {Subscription} from 'rxjs/Rx';
 
 import {LineSeriesComponent, LineChartComponent} from '@swimlane/ngx-charts';
 
@@ -16,7 +17,7 @@ import {SavingsEvolutionService} from '../shared/services/savings-evolution.serv
   styleUrls: ['./profile-plan.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfilePlanComponent implements OnInit {
+export class ProfilePlanComponent implements OnInit, OnDestroy {
   // @Input()
   projection: any;
   @Input() profile: ProfileInterface;
@@ -26,6 +27,9 @@ export class ProfilePlanComponent implements OnInit {
   // @ViewChild('chart') chart: LineChartComponent;
   @ViewChild('chart') chart;
   @ViewChild(LineSeriesComponent) lineSeriesComponent;
+
+  selectedGoalSubscription: Subscription;
+  profileSubscription: Subscription;
 
   // view: any[] = [900, 260];
   view: any[];
@@ -49,14 +53,18 @@ export class ProfilePlanComponent implements OnInit {
               private savingsEvolution: SavingsEvolutionService) { }
 
   ngOnInit() {
-    this.session.selectedGoal$.subscribe(selectedGoal =>
+    this.selectedGoalSubscription = this.session.selectedGoal$.subscribe(selectedGoal =>
                                           this.refreshSavingsEvolution());
-    this.session.profile$.subscribe(profile =>
+    this.profileSubscription = this.session.profile$.subscribe(profile =>
                                           this.refreshSavingsEvolution());
     const dims = this.element.nativeElement.parentNode.getBoundingClientRect();
     this.view = [dims.width, dims.height];
-    this.maxAge = this.profile.age + this.profile.planDuration;
+    // this.maxAge = this.profile.age + this.profile.planDuration;
     this.refreshSavingsEvolution();
+  }
+  ngOnDestroy() {
+    this.selectedGoalSubscription.unsubscribe();
+    this.profileSubscription.unsubscribe();
   }
 
   onDrop(event: DropEvent) {
@@ -112,10 +120,10 @@ export class ProfilePlanComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log('select event', event);
+    // console.log('select event', event);
   }
   onActivate(event) {
-    console.log('activate event', event);
+    // console.log('activate event', event);
   }
 
   private round(x: number, multipleOf?: number) {
@@ -126,6 +134,7 @@ export class ProfilePlanComponent implements OnInit {
   }
 
   private getxOffsetForGoal(goal: GoalInterface) {
+    console.log('do I pass here ============');
     const chartOffsetX = this.getChartXOffset() + this.getChartdivXOffest();
     let chartWidth = 0;
     if (this.chart) {
@@ -156,6 +165,7 @@ export class ProfilePlanComponent implements OnInit {
   }
 
   private refreshSavingsEvolution() {
+    this.maxAge = this.profile.age + this.profile.planDuration;
     const projectionTemp = [];
     const savings = this.savingsEvolution.calculateSavingsEvolution(this.profile);
     const savingsChartData = [];
@@ -173,7 +183,6 @@ export class ProfilePlanComponent implements OnInit {
       'series': savingsChartData
     });
     this.projection = projectionTemp;
-    console.log('projectionTemp', this.projection);
     this.cdr.detectChanges();
   }
 

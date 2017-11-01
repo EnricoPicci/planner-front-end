@@ -1,0 +1,96 @@
+{
+    "id": null,
+    "firstName": "Carlo",
+    "lastName": "Rossi",
+    "age": 31,
+    "goals": [
+      {
+        "name": "Auto",
+        "icon": "motori/motori.png",
+        "type": {
+          "code": "2",
+          "name": "Motori",
+          "icon": "motori/motori.png"
+        },
+        "age": 38,
+        "value": 20000
+      },
+      {
+        "name": "La mia prima casa",
+        "icon": "proprieta/immobili.png",
+        "type": {
+          "code": "1",
+          "name": "Immobili",
+          "icon": "proprieta/immobili.png"
+        },
+        "age": 40,
+        "value": 110000,
+        "debtYearlyRate": 12000,
+        "debtDuration": 20
+      },
+      {
+        "name": "Il mio piano pensione",
+        "icon": "ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png",
+        "type": {
+          "code": "pip",
+          "name": "Piano Pensione",
+          "icon": "ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png"
+        },
+        "age": 62,
+        "value": null,
+        "cashComp2onent": 0,
+        "debtComponent": 0,
+        "debtDuration": 0,
+        "debtInterest": 0,
+        "investmentComponent": 0,
+        "investmentInterest": 0,
+        "debtYearlyRate": 3000
+      },
+      {
+        "name": "Il mio Pac",
+        "icon": "ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png",
+        "type": {
+          "code": "pac",
+          "name": "Piano di Accumulo",
+          "icon": "ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png"
+        },
+        "age": 35,
+        "value": null,
+        "cashComponent": 0,
+        "debtComponent": 0,
+        "debtDuration": 0,
+        "debtInterest": 0,
+        "investmentComponent": 0,
+        "investmentInterest": 0,
+        "debtYearlyRate": 10000,
+        "investmentDuration": 11
+      },
+      {
+        "name": "La mia assicurazione",
+        "icon": "ic_security_black_24dp/web/ic_security_black_24dp_1x.png",
+        "type": {
+          "code": "life-ins",
+          "name": "Protezione",
+          "icon": "ic_security_black_24dp/web/ic_security_black_24dp_1x.png"
+        },
+        "age": 51,
+        "value": null,
+        "cashComponent": 0,
+        "debtComponent": 0,
+        "debtDuration": 0,
+        "debtInterest": 0,
+        "investmentComponent": 0,
+        "investmentInterest": 0,
+        "futureIncomeCoveragePercentage": 20
+      }
+    ],
+    "initialCapital": 10000,
+    "status": {
+      "code": "2",
+      "name": "Celibe"
+    },
+    "yearlySavings": 40000,
+    "investmentThreashold": 5000,
+    "valueAtRisk": 500,
+    "planDuration": 31
+  }
