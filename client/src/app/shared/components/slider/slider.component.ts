@@ -51,7 +51,7 @@ export class SliderComponent implements OnInit {
   getTitleValue() {
     let ret = this.title;
     if (this.value) {
-      ret = ret + ' - ' + this.value;
+      ret = ret + ' - ' + this.value.toLocaleString('it-IT');
     }
     return ret;
   }
@@ -62,6 +62,12 @@ export class SliderComponent implements OnInit {
       ret = 0;
     }
     return ret;
+  }
+
+  formatNumber(number: number) {
+    // return new Intl.NumberFormat().format(number);
+    // return Number(number).toLocaleString();
+    return number.toLocaleString('it-IT');
   }
 
 }

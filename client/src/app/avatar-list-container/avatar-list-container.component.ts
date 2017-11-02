@@ -24,7 +24,7 @@ export class AvatarListContainerComponent implements OnInit {
   constructor(private backendHttpService: BackendHttpService) { }
 
   ngOnInit() {
-    this.avatarList$ = this.backendHttpService.getAllAvatars();
+    // this.avatarList$ = this.backendHttpService.getAllAvatars();
     this.jobList$ = this.backendHttpService.getJobList();
     this.age = this.startAge;
     this.income = this.startIncome;
@@ -32,6 +32,9 @@ export class AvatarListContainerComponent implements OnInit {
 
   ageChanged(event: MdSliderChange) {
     this.age = event.value;
+    if (this.age && this.income) {
+      this.getAvatarsForProfile();
+    }
   }
 
   incomeChanged(event: MdSliderChange) {
