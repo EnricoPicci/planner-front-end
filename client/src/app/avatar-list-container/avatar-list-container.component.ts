@@ -14,8 +14,8 @@ import {AvatarSelectionParamsInterface} from '../shared/model/avatar-selection-p
 })
 export class AvatarListContainerComponent implements OnInit {
   isMale = false;
-  avatarList$: Observable<AvatarInterface>;
-  jobList$: Observable<JobInterface>;
+  avatarList$: Observable<AvatarInterface[]>;
+  jobList$: Observable<JobInterface[]>;
   startAge = 20;
   age: number;
   startIncome = 0;

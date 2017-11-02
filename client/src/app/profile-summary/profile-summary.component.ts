@@ -27,7 +27,9 @@ export class ProfileSummaryComponent implements OnInit {
   ngOnInit() {
     this.backendHttpService.getStatusList()
                             .subscribe(result => this.statuses = result);
-    this.createForm(this.profile);
+    if (this.profile) {
+      this.createForm(this.profile);
+    }
   }
 
   createForm(profile: ProfileInterface) {

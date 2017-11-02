@@ -60,11 +60,15 @@ export class ProfilePlanComponent implements OnInit, OnDestroy {
     const dims = this.element.nativeElement.parentNode.getBoundingClientRect();
     this.view = [dims.width, dims.height];
     // this.maxAge = this.profile.age + this.profile.planDuration;
-    this.refreshSavingsEvolution();
+    // this.refreshSavingsEvolution();
   }
   ngOnDestroy() {
-    this.selectedGoalSubscription.unsubscribe();
-    this.profileSubscription.unsubscribe();
+    if (this.selectedGoalSubscription) {
+      this.selectedGoalSubscription.unsubscribe();
+    }
+    if (this.profileSubscription) {
+      this.profileSubscription.unsubscribe();
+    }
   }
 
   onDrop(event: DropEvent) {
@@ -165,6 +169,9 @@ export class ProfilePlanComponent implements OnInit, OnDestroy {
   }
 
   private refreshSavingsEvolution() {
+    if (!this.profile) {
+      return null;
+    }
     this.maxAge = this.profile.age + this.profile.planDuration;
     const projectionTemp = [];
     const savings = this.savingsEvolution.calculateSavingsEvolution(this.profile);

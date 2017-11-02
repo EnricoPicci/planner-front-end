@@ -15,7 +15,7 @@ import {GoalInterface} from '../shared/model/goal.interface';
 })
 export class ProfileContainerComponent implements OnInit, OnDestroy {
   profile: ProfileInterface;
-  goalTypes$: Observable<GoalTypeInterface>;
+  goalTypes$: Observable<GoalTypeInterface[]>;
   goalSelected: GoalInterface;
   goalSelectedSub: Subscription;
 
@@ -36,6 +36,9 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.profile = this.session.profile;
+    if (!this.profile) {
+      this.router.navigate(['avatars']);
+    }
     this.goalTypes$ = this.backendHttpService.getGoalTypeList();
     // this.getProjection();
 

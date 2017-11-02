@@ -33,13 +33,16 @@ var goaltypes = [
   {code: '5', name: 'Collezioni', icon: 'collezioni/collezioni.png', value: 100000}, 
   {code: 'pip',
     name: 'Piano Pensione',
-    icon: 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png'},
+    icon: 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png',
+    value: 0},
   {code: 'pac',
     name: 'Piano di Accumulo',
-    icon: 'ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png'},
+    icon: 'ic_account_balance_black_24dp/web/ic_account_balance_black_24dp_1x.png',
+    value: 0},
   {code: 'life-ins',
     name: 'Protezione',
-    icon: 'ic_security_black_24dp/web/ic_security_black_24dp_1x.png'}
+    icon: 'ic_security_black_24dp/web/ic_security_black_24dp_1x.png',
+    value: 0}
 ];
 /* set job types */
 var jobs = [
