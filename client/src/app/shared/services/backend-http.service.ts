@@ -66,7 +66,8 @@ avatars = [
     yearlySavings: 25000,
     status: this.statuses[0],
     image: 'assets/images/Architetto.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 50, value: 100000},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 50, value: 100000,
+              debtYearlyRate: 0, debtDuration: 0},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 40, value: 20000}]},
     {name: 'Cuoco',
     age: '31',
@@ -74,7 +75,8 @@ avatars = [
     yearlySavings: 10000,
     status: this.statuses[1],
     image: 'assets/images/Cuoco.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 40, value: 100000},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 40, value: 100000,
+              debtYearlyRate: 0, debtDuration: 0},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 35, value: 20000}]},
     {name: 'Commesso',
     age: '21',
@@ -82,7 +84,8 @@ avatars = [
     yearlySavings: 5000,
     status: this.statuses[1],
     image: 'assets/images/Commesso.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 40, value: 200000},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 40, value: 200000,
+              debtYearlyRate: 0, debtDuration: 0},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 30, value: 20000}]},
     {name: 'Manager',
     age: '41',
@@ -90,7 +93,8 @@ avatars = [
     yearlySavings: 20000,
     status: this.statuses[0],
     image: 'assets/images/Manager.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 50, value: 100000},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 50, value: 100000,
+              debtYearlyRate: 0, debtDuration: 0},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 55, value: 10000},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 60, value: 20000},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 65, value: 30000}]},
@@ -100,7 +104,8 @@ avatars = [
     yearlySavings: 10000,
     status: this.statuses[0],
     image: 'assets/images/Elettricista.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 45, value: 100000},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 45, value: 100000,
+              debtYearlyRate: 0, debtDuration: 0},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 50, value: 20000}]},
     {name: 'Consulente',
     age: '49',
@@ -108,7 +113,8 @@ avatars = [
     yearlySavings: 15000,
     status: this.statuses[0],
     image: 'assets/images/Consulente.png',
-    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 50, value: 100000},
+    goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: this.propertyGoal, age: 50, value: 100000,
+              debtYearlyRate: 0, debtDuration: 0},
             {name: 'Auto', icon: 'motori/motori.png', type: this.motorGoal, age: 60, value: 20000}]}
   ];
 
@@ -148,7 +154,6 @@ avatars = [
       this.nextProfileID++;
     }
     this.storedProfiles[profile.id] = profile;
-    console.log('profile saved', JSON.stringify(profile, undefined, 2));
     return Observable.of(profile.id);
   }
   getProfile(id: string) {

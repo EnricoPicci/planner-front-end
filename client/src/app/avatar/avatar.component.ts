@@ -38,18 +38,30 @@ export class AvatarComponent implements OnInit {
   }
 
   private getProfileFromAvatar() {
-    const profile: ProfileInterface = {
-      id: null,
-      firstName: null,
-      lastName: null,
-      // tslint:disable-next-line:radix
-      age: parseInt(this.avatar.age),
-      goals: this.avatar.goals,
-      initialCapital: 0,
-      status: this.avatar.status,
-      yearlySavings: this.avatar.yearlySavings,
-      planDuration: this.avatar.planDuration,
-    };
+    // const profile: ProfileInterface = {
+    //   id: null,
+    //   firstName: null,
+    //   lastName: null,
+    //   // tslint:disable-next-line:radix
+    //   age: parseInt(this.avatar.age),
+    //   goals: this.avatar.goals,
+    //   initialCapital: 0,
+    //   status: this.avatar.status,
+    //   yearlySavings: this.avatar.yearlySavings,
+    //   planDuration: this.avatar.planDuration,
+    // };
+    const profile = this.session.profile;
+    profile.goals = [];
+    // tslint:disable-next-line:radix
+    const ageDifference = parseInt(this.avatar.age) - profile.age;
+    for (const goal of this.avatar.goals) {
+      const goalCopy = {... goal};
+      goalCopy.age = goal.age - ageDifference;
+      profile.goals.push(goalCopy);
+    }
+    profile.initialCapital = 0;
+    profile.status = this.avatar.status;
+    profile.planDuration = this.avatar.planDuration;
     return profile;
   }
 

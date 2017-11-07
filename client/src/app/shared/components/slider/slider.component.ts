@@ -42,7 +42,6 @@ export class SliderComponent implements OnInit {
   }
 
   onValueChanged(event) {
-    console.log('changed', event);
     this.value = event.value;
     this.valueChanged.next(this.value);
     // this.changeDetectorRef.detectChanges();

@@ -112,9 +112,8 @@ describe('BackendHttpService', () => {
                       .switchMap(profileId => backendHttpService.getAllProfiles()
                                               .map(allProfiles => [allProfiles, profileId] ))
                       .subscribe(results => {
-                        // console.log(results);
-                        const allProfiles = results[0];
-                        const profileId = results[1];
+                        const allProfiles = <any[]>results[0];
+                        const profileId = <string>results[1];
                         expect(allProfiles[profileId].firstName).toBe(profile.firstName);
                         done();
                       });

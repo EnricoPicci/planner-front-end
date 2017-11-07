@@ -105,6 +105,7 @@ export class ProfilePlanComponent implements OnInit, OnDestroy {
         value: goalType.value,
         cashComponent: 0,
         debtComponent: 0,
+        debtYearlyRate: 0,
         debtDuration: 0,
         debtInterest: 0,
         investmentComponent: 0,

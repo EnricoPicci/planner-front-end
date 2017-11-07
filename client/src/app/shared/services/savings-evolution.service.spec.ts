@@ -13,6 +13,9 @@ const expensesAtYear30 = 15000;
 const houseValue = 400000;
 const yearlyMortgageRate = 15000;
 const mortgageDurationInYears = 20;
+const yearlyPIPRate = 10000;
+const yearlyPACRate = 20000;
+const pacDurationInYears = 10;
 
 describe('SavingsEvolutionService', () => {
   beforeEach(() => {
@@ -39,6 +42,18 @@ describe('SavingsEvolutionService', () => {
     expect(service.calculateExpensesEvolution(profile)[5]).toBe(houseValueNotCoveredByMortgage + yearlyMortgageRate);
     expect(service.calculateExpensesEvolution(profile)[24]).toBe(yearlyMortgageRate);
     expect(service.calculateExpensesEvolution(profile)[25]).toBe(0);
+  }));
+  it('calculates the evolution of expenses with mortgage and PIP', inject([SavingsEvolutionService], (service: SavingsEvolutionService) => {
+    const profile = createProfileWithMortgageAndPIP();
+    expect(service.calculateExpensesEvolution(profile)[24]).toBe(yearlyMortgageRate + yearlyPIPRate);
+    expect(service.calculateExpensesEvolution(profile)[25]).toBe(yearlyPIPRate);
+  }));
+  it('calculates the evolution of expenses with mortgage PIP PAC', inject([SavingsEvolutionService], (service: SavingsEvolutionService) => {
+    const profile = createProfileWithMortgagePIPAndPAC();
+    expect(service.calculateExpensesEvolution(profile)[14]).toBe(yearlyMortgageRate + yearlyPIPRate);
+    expect(service.calculateExpensesEvolution(profile)[15]).toBe(yearlyMortgageRate + yearlyPIPRate + yearlyPACRate);
+    expect(service.calculateExpensesEvolution(profile)[24]).toBe(yearlyMortgageRate + yearlyPIPRate + yearlyPACRate);
+    expect(service.calculateExpensesEvolution(profile)[25]).toBe(yearlyPIPRate);
   }));
 
   it('calculates the evolution of savings after 9 years', inject([SavingsEvolutionService], (service: SavingsEvolutionService) => {
@@ -118,6 +133,106 @@ function createProfileWithMortgage() {
     'debtYearlyRate': yearlyMortgageRate,
     'debtDuration': mortgageDurationInYears
   }];
+
+  const profile = {
+    id: null,
+    firstName: 'Enrico',
+    lastName: 'Typescript',
+    age: 30,
+    status: null,
+    initialCapital: initialCapital,
+    yearlySavings: yearlySavings,
+    planDuration: planDuration,
+    goals: goals
+  };
+  return profile;
+}
+
+
+function createProfileWithMortgageAndPIP() {
+  const goals = [{
+      'name': 'La mia prima casa',
+      'icon': 'proprieta/immobili.png',
+      'type': {
+        'code': '1',
+        'name': 'Immobili',
+        'icon': 'proprieta/immobili.png',
+        'value': 0  // this is not the value of the House, but just the default value of the GoalType with type 1, i.e. House
+      },
+      'age': 35,
+      'value': houseValue,
+      'debtYearlyRate': yearlyMortgageRate,
+      'debtDuration': mortgageDurationInYears
+    },
+    {
+      'name': 'Il mio PIP',
+      'icon': 'proprieta/immobili.png',
+      'type': {
+          'code': 'pip',
+          'name': 'Piano Pensione',
+          'icon': 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png',
+          'value': 0  // this is not the value of the House, but just the default value of the GoalType with type pip
+      },
+      'age': 40,
+      'debtYearlyRate': yearlyPIPRate
+    }
+  ];
+
+  const profile = {
+    id: null,
+    firstName: 'Enrico',
+    lastName: 'Typescript',
+    age: 30,
+    status: null,
+    initialCapital: initialCapital,
+    yearlySavings: yearlySavings,
+    planDuration: planDuration,
+    goals: goals
+  };
+  return profile;
+}
+
+function createProfileWithMortgagePIPAndPAC() {
+  const goals = [{
+      'name': 'La mia prima casa',
+      'icon': 'proprieta/immobili.png',
+      'type': {
+        'code': '1',
+        'name': 'Immobili',
+        'icon': 'proprieta/immobili.png',
+        'value': 0  // this is not the value of the House, but just the default value of the GoalType with type 1, i.e. House
+      },
+      'age': 35,
+      'value': houseValue,
+      'debtYearlyRate': yearlyMortgageRate,
+      'debtDuration': mortgageDurationInYears
+    },
+    {
+      'name': 'Il mio PIP',
+      'icon': 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png',
+      'type': {
+          'code': 'pip',
+          'name': 'Piano Pensione',
+          'icon': 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png',
+          'value': 0  // this is not the value of the House, but just the default value of the GoalType with type pip
+      },
+      'age': 40,
+      'debtYearlyRate': yearlyPIPRate
+    },
+    {
+      'name': 'Il mio PAC',
+      'icon': 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png',
+      'type': {
+          'code': 'pac',
+          'name': 'Piano di Accumulo',
+          'icon': 'ic_redeem_black_24dp/web/ic_redeem_black_24dp_1x.png',
+          'value': 0  // this is not the value of the House, but just the default value of the GoalType with type pip
+      },
+      'age': 45,
+      'debtYearlyRate': yearlyPACRate,
+      investmentDuration: pacDurationInYears
+    }
+  ];
 
   const profile = {
     id: null,

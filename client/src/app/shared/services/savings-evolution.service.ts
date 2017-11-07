@@ -30,8 +30,18 @@ export class SavingsEvolutionService {
         for (let i = goalYear; i < endOfMortgage; i++) {
           expensesEvolution[i] = expensesEvolution[i] + goal.debtYearlyRate;
         }
+      } else if (goal.type && goal.type.code === GoalTypeCodes.Pip && goal.debtYearlyRate > 0) {
+        for (let i = goalYear; i < profile.planDuration; i++) {
+          console.log('expensesEvolution[i]', i, expensesEvolution[i], goal.debtYearlyRate, goal, profile);
+          expensesEvolution[i] = expensesEvolution[i] + goal.debtYearlyRate;
+        }
+      } else if (goal.type && goal.type.code === GoalTypeCodes.Pac && goal.debtYearlyRate > 0) {
+        const endOfPac = goalYear + goal.investmentDuration;
+        for (let i = goalYear; i < endOfPac; i++) {
+          expensesEvolution[i] = expensesEvolution[i] + goal.debtYearlyRate;
+        }
       } else {
-        expensesEvolution[goalYear] = expensesEvolution[goalYear] + goal.value;
+          expensesEvolution[goalYear] = expensesEvolution[goalYear] + goal.value;
       }
     }
     return expensesEvolution;

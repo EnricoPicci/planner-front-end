@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import {GoalInterface} from '../shared/model/goal.interface';
+import {SessionService} from '../shared/services/session.service';
 
 @Component({
   selector: 'planner-profile-goal-pac',
@@ -10,16 +11,18 @@ import {GoalInterface} from '../shared/model/goal.interface';
 export class ProfileGoalPacComponent implements OnInit {
   @Input() goal: GoalInterface;
 
-  constructor() { }
+  constructor(private session: SessionService) { }
 
   ngOnInit() {
   }
 
   debtYearlyRateChanged(yearlyRate: number) {
     this.goal.debtYearlyRate = yearlyRate;
+    this.session.goalSelectedChanged(this.goal);
   }
   investmentDurationChanged(duration: number) {
     this.goal.investmentDuration = duration;
+    this.session.goalSelectedChanged(this.goal);
   }
 
 }

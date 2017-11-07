@@ -148,7 +148,6 @@ avatars = [
       this.nextProfileID++;
     }
     this.storedProfiles[profile.id] = profile;
-    console.log('profile saved', JSON.stringify(profile, undefined, 2));
     return Observable.of(profile.id);
   }
   getProfile(id: string) {
