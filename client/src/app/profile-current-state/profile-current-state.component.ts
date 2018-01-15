@@ -11,9 +11,21 @@ import {SessionService} from '../shared/services/session.service';
 export class ProfileCurrentStateComponent implements OnInit {
   @Input() profile: ProfileInterface;
 
+  riskAppetites = [
+    {label: 'Nulla', value: 0},
+    {label: 'Bassa', value: 300},
+    {label: 'Media', value: 700},
+    {label: 'Alta', value: 1000},
+    {label: 'Molto alta', value: 1500},
+  ];
+  riskAppetite;
+
   constructor(private session: SessionService) { }
 
   ngOnInit() {
+    if (!this.profile.valueAtRisk) {
+      this.profile.valueAtRisk = this.riskAppetites[0].value;
+    }
   }
 
   initialCapitalChanged(value) {
@@ -28,10 +40,10 @@ export class ProfileCurrentStateComponent implements OnInit {
     this.profile.investmentThreashold = value;
     this.session.profileChanged();
   }
-  valueAtRiskChanged(value) {
-    this.profile.valueAtRisk = value;
-    this.session.profileChanged();
-  }
+  // valueAtRiskChanged(value) {
+  //   this.profile.valueAtRisk = value;
+  //   this.session.profileChanged();
+  // }
   planDurationChanged(value) {
     this.profile.planDuration = value;
     this.session.profileChanged();
@@ -40,5 +52,27 @@ export class ProfileCurrentStateComponent implements OnInit {
   getMaxPlanDuration() {
     return 100 - this.profile.age;
   }
+
+  setRiskAppetite(event) {
+    console.log('appetite chosen', event);
+    this.riskAppetite = event.value;
+    this.profile.valueAtRisk = this.riskAppetite;
+    // this.session.setProfile(this.profile);
+    // this.session.profileChanged();
+  }
+  // getRiskAppetite() {
+  //   const ra = this.riskAppetites[this.profile.valueAtRisk];
+  //   console.log('risk appetite chosen', ra);
+  //   return this.riskAppetites[this.profile.valueAtRisk];
+  // }
+
+  // riskAppetiteOfProfile() {
+  //   if (this.profile.valueAtRisk) {
+  //     this.riskAppetite = this.riskAppetites[this.profile.valueAtRisk];
+  //   } else {
+  //     this.riskAppetite = this.riskAppetites[0];
+  //   }
+  //   return this.riskAppetite;
+  // }
 
 }

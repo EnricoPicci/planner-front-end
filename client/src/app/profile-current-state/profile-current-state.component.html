@@ -2,11 +2,11 @@
 
   <div  fxLayout="row" fxFlex="1 1 100%">
     <div fxFlex="1 1 50%">
-      <planner-slider [title]="'Liquidità iniziale'" [min]="0" [max]="100000" 
+      <planner-slider [title]="'Ricchezza finanziaria'" [min]="0" [max]="100000" 
           (valueChanged)="initialCapitalChanged($event)" [value]="profile.initialCapital"></planner-slider>
     </div>
     <div fxFlex="1 1 50%">
-      <planner-slider [title]="'Risparmio annuale'" [min]="0" [max]="100000"
+      <planner-slider [title]="'Reddito netto'" [min]="0" [max]="100000"
           (valueChanged)="annualSavingsChanged($event)" [value]="profile.yearlySavings"></planner-slider>
     </div>
   </div>
@@ -17,8 +17,15 @@
           (valueChanged)="investmentThreasholdChanged($event)" [value]="profile.investmentThreashold"></planner-slider>
     </div>
     <div fxFlex>
-      <planner-slider [title]="'Massima perdita accettabile (VAR)'" [min]="0" [max]="3000"
-          (valueChanged)="valueAtRiskChanged($event)" [value]="profile.valueAtRisk"></planner-slider>
+      <h4 style="padding-right: 20px;">Propensione al rischio</h4>
+      <md-radio-group class="radio-group" [value]="riskAppetite" (change)="setRiskAppetite($event)">
+        <md-radio-button class="radio-button" *ngFor="let appetite of riskAppetites" 
+          [value]="appetite.value" [checked]="appetite.value === profile.valueAtRisk" fxFlex>
+            {{appetite.label}}
+        </md-radio-button>
+      </md-radio-group>
+      <!-- <planner-slider [title]="'Massima perdita accettabile (VAR)'" [min]="0" [max]="3000"
+          (valueChanged)="valueAtRiskChanged($event)" [value]="profile.valueAtRisk"></planner-slider> -->
     </div>
     <div fxFlex>
       <planner-slider [title]="'Durata del piano'" [min]="0" [max]="getMaxPlanDuration()" [step]="1"

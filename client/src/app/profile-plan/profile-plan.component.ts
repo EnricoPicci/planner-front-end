@@ -187,7 +187,7 @@ export class ProfilePlanComponent implements OnInit, OnDestroy {
       savingsChartData.push(yearlySavings);
     }
     projectionTemp.push({
-      'name': 'Liquidità',
+      'name': 'Ricchezza',
       'series': savingsChartData
     });
     this.projection = projectionTemp;

@@ -20,6 +20,7 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
   goalSelectedSub: Subscription;
 
   isseData;
+  isseParameters;
   financialPlanData;
 
   showCurrentState = true;
@@ -28,6 +29,9 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
   buildFinancialPlan = false;
   showIsse = false;
   showFinancialPlan = false;
+
+  showProgressSpinner = false;
+  progressMessage = 'Stiamo eseguendo i calcoli';
 
   constructor(private session: SessionService,
                 private backendHttpService: BackendHttpService,
@@ -52,15 +56,30 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
 
   getProjection() {
     // this.router.navigate(['isse']);
-    this.prepareAllSectionsClosed();
+    this.closeAllSections();
+    this.showProgressSpinner = true;
     this.backendHttpService.getProjection(this.profile)
-                            .map(projectionsData => projectionsData['graphs'])
-                            .subscribe(graphsData => {
-                              this.isseData = graphsData.find(data => data['id'] === 'grafico_02')['values'];
-                              this.financialPlanData = graphsData.find(data => data['id'] === 'grafico_04')['scelte'];
-                              // this.showIsse = true;
-                              // this.showFinancialPlan = true;
-                            });
+                            // .map(projectionsData => projectionsData['graphs'])
+                            .subscribe(
+                              projectionsData => {
+                                const status = projectionsData['status'];
+                                if (status && status >= 400) {
+                                  this.progressMessage = 'Si è verificato un errore nel calcolo';
+                                } else {
+                                  this.isseParameters = projectionsData['pars'];
+                                  const graphsData = projectionsData['graphs'];
+                                  this.isseData = graphsData.find(data => data['id'] === 'grafico_02')['values'];
+                                  this.financialPlanData = graphsData.find(data => data['id'] === 'grafico_04')['scelte'];
+                                  this.showProgressSpinner = false;
+                                  this.buildFinancialPlan = true;
+                                  this.buildIsse = true;
+                                }
+                              },
+                              error => {
+                                this.progressMessage = 'Si è verificato un errore nel calcolo';
+                                console.error('error while calling Engine', error);
+                              }
+                            );
   }
 
   delete(goal: GoalInterface) {
@@ -74,6 +93,7 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
   }
 
   toggleCurrentState() {
+    console.log('Profile current state', this.profile);
     this.showCurrentState = !this.showCurrentState;
   }
   toggleObjectives() {
@@ -86,13 +106,15 @@ export class ProfileContainerComponent implements OnInit, OnDestroy {
     this.showFinancialPlan = !this.showFinancialPlan;
   }
 
-  prepareAllSectionsClosed() {
-    this.buildFinancialPlan = true;
-    this.buildIsse = true;
+  closeAllSections() {
     this.showCurrentState = false;
     this.showFinancialPlan = false;
     this.showIsse = false;
     this.showObjectives = false;
+  }
+
+  getIsse() {
+    return this.isseParameters.ISSE;
   }
 
 }

@@ -6,3 +6,13 @@
     padding: 15px;
     margin: 10px;
 }
+
+.runningCalculation {
+    font-size: xx-large;
+    background: azure;
+    margin-top: 500px;
+    margin-left: 550px;
+    position: absolute;
+    border-color: crimson;
+    border-style: solid;
+}

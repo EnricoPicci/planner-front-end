@@ -49,16 +49,17 @@ export class ProfileISSEComponent implements OnInit {
                       value: d.invest === -999999 ? 0 : d.invest
                     },
                     {
-                      name: 'cc',
-                      value: d.cc === -999999 ? 0 : d.cc
-                    },
-                    {
                       name: 'debito',
                       value: d.debito === -999999 ? 0 : d.debito
+                    },
+                    {
+                      name: 'cc',
+                      value: d.cc === -999999 ? 0 : d.cc
                     }
                   ]
                 };
-              });
+              })
+              .reverse();
   }
 
   getMaxAnno() {

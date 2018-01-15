@@ -54,6 +54,8 @@
           </div>
         </div>
 
+        <div class="runningCalculation" *ngIf="showProgressSpinner">{{progressMessage}}</div>
+
          <!-- ************ Area Objectives Details ************ -->
         <div class="container container3" fxFlex [style.min-height]="showObjectives ? '380px': '40px'">
           <div class="section" fxLayout="column" fxFlex>
@@ -84,7 +86,7 @@
         <div class="container container3" fxFlex [style.min-height]="showIsse ? '900px': '40px'" *ngIf="buildIsse">
           <div class="section" fxLayout="column" fxFlex>
             <div fxFlex="35px" class="section-header">
-              <h4 class="font section-title">ISSE</h4>
+              <h4 class="font section-title"> {{'ISSE' + ' ' + getIsse()}}</h4>
               <span fxFlex></span>
               <h4 class="section-title section-tools">
                 {{showIsse ? 'Chiudi': 'Apri'}}

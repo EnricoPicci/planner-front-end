@@ -122,40 +122,60 @@ avatars = [
   storedProfiles = {};
   nextProfileID = 0;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
+  // getAllAvatars() {
+  //   return Observable.of(this.avatars);
+  // }
+  // getAvatarsForProfile(params: AvatarSelectionParamsInterface) {
+  //   let data;
+  //   if (params.age < 35) {
+  //     // tslint:disable-next-line:radix
+  //     data = this.avatars.filter(avatar => parseInt(avatar.age) <= 40);
+  //   } else {
+  //     // tslint:disable-next-line:radix
+  //     data = this.avatars.filter(avatar => parseInt(avatar.age) > 40);
+  //   }
+  //   return Observable.of(data);
+  // }
   getAllAvatars() {
-    return Observable.of(this.avatars);
+    const url = 'https://mh187jgrk4.execute-api.us-east-1.amazonaws.com/dev/getAvatarlist';
+    return this.http.get<Array<AvatarInterface>>(url)
+                      .map(data => data['results']);
   }
   getAvatarsForProfile(params: AvatarSelectionParamsInterface) {
-    let data;
-    if (params.age < 35) {
-      // tslint:disable-next-line:radix
-      data = this.avatars.filter(avatar => parseInt(avatar.age) <= 40);
-    } else {
-      // tslint:disable-next-line:radix
-      data = this.avatars.filter(avatar => parseInt(avatar.age) > 40);
-    }
-    return Observable.of(data);
+    const url = 'https://mh187jgrk4.execute-api.us-east-1.amazonaws.com/dev/avatars4profile';
+    return this.http.post<Array<AvatarInterface>>(url, params)
+                      .map(data => data['results']);
   }
 
+  // getJobList() {
+  //   return Observable.of(this.jobs);
+  // }
   getJobList() {
-    return Observable.of(this.jobs);
+    const url = 'https://mh187jgrk4.execute-api.us-east-1.amazonaws.com/dev/getJobList';
+    return this.http.get<Array<JobInterface>>(url)
+                      .map(data => data['results']);
   }
 
+  // getStatusList() {
+  //   return Observable.of(this.statuses);
+  // }
   getStatusList() {
-    return Observable.of(this.statuses);
+    const url = 'https://mh187jgrk4.execute-api.us-east-1.amazonaws.com/dev/getStatusList';
+    return this.http.get<Array<StatusInterface>>(url)
+                      .map(data => data['results']);
   }
 
-  saveProfile(profile: ProfileInterface) {
-    const profileId = profile.id;
-    if (profileId === null) {
-      profile.id = this.nextProfileID + '';
-      this.nextProfileID++;
-    }
-    this.storedProfiles[profile.id] = profile;
-    return Observable.of(profile.id);
-  }
+  // saveProfile(profile: ProfileInterface) {
+  //   const profileId = profile.id;
+  //   if (profileId === null) {
+  //     profile.id = this.nextProfileID + '';
+  //     this.nextProfileID++;
+  //   }
+  //   this.storedProfiles[profile.id] = profile;
+  //   return Observable.of(profile.id);
+  // }
   getProfile(id: string) {
     return Observable.of(this.storedProfiles[id]);
   }
@@ -167,13 +187,52 @@ avatars = [
     }
     return Observable.of(allProfilesArray);
   }
+  saveProfile(profile: ProfileInterface) {
+    const url = 'https://mh187jgrk4.execute-api.us-east-1.amazonaws.com/dev/saveProfile';
+    return this.http.put(url, profile)
+                      .map(data => {
+                        const profileId = data['results'];
+                        profile.id = profileId;
+                        return profileId;
+                      });
+  }
+  // getProfile(id: string) {
+  //   const params = new HttpParams().set('id', id);
+  //   const url = this.apiurl + 'getprofile';
+  //   return this.http.get(url, {params})
+  //                     .map(data => data['results']);
+  // }
+  // getAllProfiles() {
+  //   const url = this.apiurl + 'getallprofiles';
+  //   return this.http.get(url)
+  //                     .map(data => data['results']);
+  // }
 
   getGoalTypeList() {
     return Observable.of(this.goaltypes);
   }
 
+  // getProjection(profile: ProfileInterface) {
+  //   return Observable.of(response);
+  // }
+
   getProjection(profile: ProfileInterface) {
-    return Observable.of(response);
+    // const url = this.apiurl + 'projection';
+    for (const goal of profile.goals) {
+      goal.type = {... goal.type};
+      delete goal.type.value;
+    }
+    if (!profile.valueAtRisk) {
+      profile.valueAtRisk = 500;
+    }
+    if (!profile.investmentThreashold) {
+      profile.investmentThreashold = 5000;
+    }
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    headers.append('Accept', 'application/json');
+    // const options = new RequestOptions({headers: headers});
+    const url = 'http://www.breakindatacompany.com/RobotWS/robotws/roboservice';
+    return this.http.post(url, profile, {headers: headers});
   }
 
 }

@@ -1,28 +1,11 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
 
-// middleware to use for all requests
-router.use(function(req, res, next) {
-    // do logging
-    console.log('Something is happening 2.');
-    next(); // make sure we go to the next routes and don't stop here
-});
-router.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-  next();
-});
-
-/* get projection data  */
-var projectionData = require ('./backend-grafici-response-data');
-var projectionDataResponse = projectionData.projectionResponse;
 
 /* set statuses */
 var statuses = [
-  {code: '1', name: 'Sposato'},
+  {code: '1', name: 'Sposato-a'},
   {code: '2', name: 'Celibe'},
-  {code: '3', name: 'Divorziato'}
+  {code: '3', name: 'Divorziato-a'}
 ];
 /* set goal types */
 var goaltypes = [
@@ -53,6 +36,7 @@ var jobs = [
   {code: '5', name: 'Elettricista'},
   {code: '6', name: 'Manager'},
   {code: '7', name: 'Consulente'},
+  {code: '8', name: 'Free Lance'},
 ];
 /* set Avatars */
 var propertyGoal = goaltypes.filter(goalType => goalType.code == '1')[0];
@@ -113,6 +97,15 @@ var avatars = [
   image: 'assets/images/Consulente.png',
   goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000,
             debtYearlyRate: 0, debtDuration: 0},
+          {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]},
+  {name: 'Free Lance',
+  age: '41',
+  planDuration: 30,
+  yearlySavings: 18000,
+  status: statuses[0],
+  image: 'assets/images/Consulente.png',
+  goals: [{name: 'Prima Casa', icon: 'proprieta/immobili.png', type: propertyGoal, age: 50, value: 100000,
+            debtYearlyRate: 0, debtDuration: 0},
           {name: 'Auto', icon: 'motori/motori.png', type: motorGoal, age: 60, value: 20000}]}
 ];
 
@@ -125,92 +118,108 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-/* GET job list. */
-router.get('/joblist', function(req, res, next) {
+function buildResponse(results) {
+  const data = {};
+  data.results = results;
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify(data),
+  };
+  addHeadersForCORS(response);
+  return response;
+}
+
+function addHeadersForCORS(response) {
+  response.headers = {
+    "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+    "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+  }
+}
+
+// ******************************************************************************************************************
+
+module.exports.getJobList = (event, context, callback) => {
   var data = {};
   data.results = jobs;
-  res.send(data);
-});
+  let response = {
+    statusCode: 200,
+    body: JSON.stringify(data),
+  };
+  addHeadersForCORS(response);
 
-/* GET avatar list. */
-router.get('/avatarlist', function(req, res, next) {
+  callback(null, response);
+
+  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
+  // callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
+};
+
+
+module.exports.getAvatarlist = (event, context, callback) => {
   var data = {};
   data.results = avatars;
   console.log('avatars  returned', data.results);
-  res.send(data);
-});
-/* POST request to get Avatar list for a certain profile. */
-router.post('/avatars4profile', function(req, res, next) {
-  var profile = req.body;
+  let response = {
+    statusCode: 200,
+    body: JSON.stringify(data),
+  };
+  addHeadersForCORS(response);
+
+  callback(null, response);
+};
+module.exports.avatars4profile = (event, context, callback) => {
+  var profile = JSON.parse(event.body);
   console.log('params to retrieve list of avatars', profile);
+  console.log('age', profile.age);
   var data = {};
-  if (profile.age < 35) {
+  if (profile.age < 40) {
     data.results = avatars.filter(avatar => avatar.age <= 40);
   } else {
-    data.results = avatars.filter(avatar => avatar.age > 40);
+    data.results = avatars.filter(avatar => avatar.age > 30);
   }
   console.log('avatars  returned', data.results);
-  res.send(data);
-});
+  let response = {
+    statusCode: 200,
+    body: JSON.stringify(data),
+  };
+  addHeadersForCORS(response);
 
-/* GET status list. */
-router.get('/statuslist', function(req, res, next) {
-  var data = {};
-  data.results = statuses;
-  res.send(data);
-});
+  callback(null, response);
+};
 
-/* PUT to save a profile. */
-/* PUT chosen over POST according to https://stackoverflow.com/questions/630453/put-vs-post-in-rest */
-router.put('/saveprofile', function(req, res, next) {
-  var profile = req.body;
-  var profileId = profile.id;
+module.exports.getStatusList = (event, context, callback) => {
+  const response = buildResponse(statuses);
+  callback(null, response);
+};
+
+module.exports.saveProfile = (event, context, callback) => {
+  const profile = JSON.parse(event.body);
+  const profileId = profile.id;
   if (profileId === null) {
     profile.id = nextProfileID;
     nextProfileID++;
   }
   storedProfiles[profile.id] = profile;
   console.log('profile saved', JSON.stringify(profile, undefined, 2));
-  var data = {};
-  data.results = profile.id;
-  res.send(data);
-});
-/* GET profile. */
-router.get('/getprofile', function(req, res, next) {
-  profileId = req.query.id;
-  console.log('profile id requested', profileId);
-  var data = {};
-  data.results = storedProfiles[profileId];
-  console.log('profile returned', data.results);
-  res.send(data);
-});
-/* GET all profiles */
-router.get('/getallprofiles', function(req, res, next) {
-  var allProfilesArray = [];
-  for(profileId in storedProfiles) {
-    allProfilesArray.push(storedProfiles[profileId]);
-  }
-  var data = {};
-  data.results = allProfilesArray;
-  res.send(data);
-  console.log('get all saved profiles', allProfilesArray);
-});
-
-
-/* GET goal type list. */
-router.get('/goaltypelist', function(req, res, next) {
-  var data = {};
-  data.results = goaltypes;
-  res.send(data);
-});
-
-/* POST projection. */
-router.post('/projection', function(req, res, next) {
-  var profile = req.body;
-  console.log('profile for projection', JSON.stringify(profile, undefined, 2));
-  var data = {};
-  data.results = projectionDataResponse;
-  res.send(data);
-});
-
-module.exports = router;
+  const response = buildResponse(profile.id);
+  callback(null, response);
+};
+// /* GET profile. */
+// router.get('/getprofile', function(req, res, next) {
+//   profileId = req.query.id;
+//   console.log('profile id requested', profileId);
+//   var data = {};
+//   data.results = storedProfiles[profileId];
+//   console.log('profile returned', data.results);
+//   res.send(data);
+// });
+// /* GET all profiles */
+// router.get('/getallprofiles', function(req, res, next) {
+//   var allProfilesArray = [];
+//   for(profileId in storedProfiles) {
+//     allProfilesArray.push(storedProfiles[profileId]);
+//   }
+//   var data = {};
+//   data.results = allProfilesArray;
+//   res.send(data);
+//   console.log('get all saved profiles', allProfilesArray);
+// });

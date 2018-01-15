@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MdSidenavModule, MdToolbarModule, MdIconModule, MdCardModule,
         MdSelectModule, MdSliderModule, MdGridListModule, MdButtonModule,
         MdCheckboxModule, MdInputModule, MdTooltipModule, MdDialogModule,
-        MdRadioModule} from '@angular/material';
+        MdRadioModule, MdProgressSpinnerModule} from '@angular/material';
 import 'hammerjs';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
